@@ -1,0 +1,22 @@
+{
+    "name": "eidaconsulting/framework",
+    "description": "Le framework maison de la soci\u0000t\u0000 EIDA COBNSULTING",
+    "type": "project",
+    "authors": [
+        {
+            "name": "EIDA CONSULTING",
+            "email": "contact@eidaconsulting.com"
+        }
+    ],
+    "require-dev": {},
+    "require": {
+        "fedapay/fedapay-php": "^0.2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app",
+            "Core\\": "core",
+            "Modules\\": "modules"
+        }
+    }
+}

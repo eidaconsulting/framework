@@ -1,0 +1,18 @@
+# www.robotstxt.org/
+# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
+
+User-agent: *
+Disallow: */app/controller/admins/
+Disallow: */app/controller/users/
+Disallow: */app/controller/AppController
+Disallow: */app/Entity/
+Disallow: */app/Table/
+Disallow: */app/views/admins/
+Disallow: */app/views/users/
+Disallow: */config/
+Disallow: */core/
+Disallow: */modules/Blogs/Admins/
+Disallow: */modules/Blogs/Entity/
+Disallow: */modules/Blogs/Table/
+Disallow: */modules/Blogs/Views/admins/
+Disallow: */modules/Blogs/Views/users/
