@@ -19,7 +19,6 @@ $router->get('/contacts', 'Publics#contacts');
 
 
 include '../modules/Roots/adminsRoot.php';
-
 include '../modules/Roots/usersRoot.php';
 include '../modules/Blogs/Root/blogRoot.php';
 //include '../modules/Paiements/Root/paiementsRoot.php';
