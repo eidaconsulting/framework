@@ -178,7 +178,7 @@
       <path value="$PROJECT_DIR$/vendor/composer" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="697" />
     <option name="height" value="745" />
@@ -350,12 +350,12 @@
       <workItem from="1581799221539" duration="619000" />
       <workItem from="1582627804562" duration="6432000" />
       <workItem from="1582715830407" duration="1653000" />
-      <workItem from="1583312109763" duration="1920000" />
+      <workItem from="1583312109763" duration="2172000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="156985000" />
+    <option name="totallyTimeSpent" value="157237000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
