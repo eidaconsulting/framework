@@ -1,1 +1,0 @@
-setcookie("name", "content", "expire time", "path(/)", "domaine", "secure(true/false)", "httpOnly (true/False)");
