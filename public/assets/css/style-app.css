@@ -371,6 +371,19 @@ label {
     max-width: 45%;
     z-index: 3000 !important;
 }
+@media screen and (max-width:780px) {
+    .is-alerte-message {
+        position: fixed;
+        left: 2.5%;
+        right: 2.5%;
+        top: 1rem;
+        max-width: 95%;
+        display: none;
+        z-index: 3000 !important;
+        border-right: 0;
+    }
+}
+
 .is-indication {
     font-size: .8rem !important;
     color: #959595;
