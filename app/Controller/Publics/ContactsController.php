@@ -30,8 +30,10 @@ class ContactsController extends \App\Controller\AppController {
     public function view(){
         $styleCSS = $this->css();
         $javascript = $this->js();
+        $form = new BootstrapForm();
 
         if(isset($_POST) && array_key_exists('envoyer', $_POST)){
+
             if(App::getInstance()->not_empty(['name', 'email', 'phone', 'objet', 'message'])){
 
                 $captcha = new captcha();
@@ -63,9 +65,9 @@ class ContactsController extends \App\Controller\AppController {
             else {
                 $this->alertDefine('Veuillez remplir tous les champs', 'danger');
             }
-        }
 
-        $form = new BootstrapForm($_POST);
+            $form = new BootstrapForm($_POST);
+        }
         $page_titre ="";
         $description = "";
         $og_picture = "";
