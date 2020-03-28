@@ -16,6 +16,7 @@ $router->get('/', 'Publics#index');
 $router->get('/404', 'Publics#notfound');
 $router->get('/databases/create', 'Publics#databases');
 $router->get('/contacts', 'Publics#contacts');
+$router->post('/contacts', 'Publics#contacts');
 
 
 include '../modules/Roots/adminsRoot.php';

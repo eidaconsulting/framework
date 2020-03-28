@@ -85,4 +85,6 @@ setlocale(LC_ALL, 'fra');
     <link rel="stylesheet" href="<?= $this->entity()->vendor_file('bootstrap/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?= $this->entity()->css_file('style.css'); ?>">
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>

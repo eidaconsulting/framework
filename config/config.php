@@ -44,16 +44,23 @@ return [
     "upload_extension" => 'picture', //picture | doc | all
     "upload_directory" => 'uploads',
 
+    /* API KEY */
     "fb_app_id" => "",
     "fb_app_secret" => "",
     "google_UA" => "",
     "yandex-code" => "",
     "bing-code" => "",
     "google-code" => "",
+    "captcha_site_key" => "6Lfn2OQUAAAAAOegmRXRFoRjfLaTR46vERzg-21m",
+    "captcha_secret_key" => "6Lfn2OQUAAAAANkFKdnJaCOGQGPgJo6SBbo3rS-P",
 
+    /* CACHE */
     "cache_duration" => 0,
     "cache_duration_format" => 's', //s = Seconde, m = Minute, h = Heure
 
+    /* FEDAPAY CODE */
     "fp_private_key" => "sk_sandbox_xeb7zZBJ89NspyfiOrgwLPPO",
     "fp_type" => "sandbox",
+
+
 ];

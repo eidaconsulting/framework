@@ -54,6 +54,9 @@
                             'required' => 'required',
                             'type' => 'textarea',
                         ]) ?>
+
+                        <?= $this->entity()->captcha(); ?>
+
                         <?= $form->input('envoyer', '', 'Envoyer le message', [
                             'class' => 'btn btn-perso-third btn-block pull-right',
                             'type' => 'submit',

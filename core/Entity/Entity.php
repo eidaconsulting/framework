@@ -539,4 +539,9 @@ class Entity
     }
 
 
+    public function captcha () {
+        return '<div class="g-recaptcha" data-sitekey="'.Config::getInstance()->get("captcha_site_key").'"></div>';
+    }
+
+
 }

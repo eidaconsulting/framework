@@ -2,6 +2,7 @@
 
 namespace App\Controller\Publics;
 
+use Core\Captcha\captcha;
 use Core\Controller\Controller;
 use App\App;
 use Core\Email\Email;
@@ -33,21 +34,31 @@ class ContactsController extends \App\Controller\AppController {
         if(isset($_POST) && array_key_exists('envoyer', $_POST)){
             if(App::getInstance()->not_empty(['name', 'email', 'phone', 'objet', 'message'])){
 
-                extract($this->secureData($_POST));
-                $content = $message;
-                $content .= '<br><br>---------------------------------<br>';
-                $content .= 'Envoyer par : ' . $name;
-                $content .= '<br>Email : ' . $email;
-                $content .= '<br>Phone : ' . $phone;
-                $content .= '<br><br><br>---------------------------------<br>';
-                $content .= '<p>Ce email a été envoyé depuis le fomulaire de contact du site http://usl-benin.com</p>';
+                $captcha = new captcha();
 
-                $sendEmail = new Email();
-                $sendEmail->sendEmail($content, null, $objet, $name, $email);
+                if ($captcha->verif_captcha() == true) {
 
-                $this->alertDefine('Email envoyé avec succès', 'success');
+                    extract($this->secureData($_POST));
+                    $content = $message;
+                    $content .= '<br><br>---------------------------------<br>';
+                    $content .= 'Envoyer par : ' . $name;
+                    $content .= '<br>Email : ' . $email;
+                    $content .= '<br>Phone : ' . $phone;
+                    $content .= '<br><br><br>---------------------------------<br>';
+                    $content .= '<p>Ce email a été envoyé depuis le fomulaire de contact du site http://usl-benin.com</p>';
 
-                unset($_POST);
+                    $sendEmail = new Email();
+                    $sendEmail->sendEmail($content, null, $objet, $name, $email);
+
+                    $this->alertDefine('Email envoyé avec succès', 'success');
+
+                    unset($_POST);
+                }
+                else {
+                    $this->alertDefine('Vous n\'avez pas valider le captcha', 'danger');
+                }
+
+
             }
             else {
                 $this->alertDefine('Veuillez remplir tous les champs', 'danger');
