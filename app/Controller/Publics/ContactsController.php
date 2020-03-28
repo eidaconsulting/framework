@@ -30,7 +30,6 @@ class ContactsController extends \App\Controller\AppController {
     public function view(){
         $styleCSS = $this->css();
         $javascript = $this->js();
-        $form = new BootstrapForm();
 
         if(isset($_POST) && array_key_exists('envoyer', $_POST)){
 
@@ -66,7 +65,13 @@ class ContactsController extends \App\Controller\AppController {
                 $this->alertDefine('Veuillez remplir tous les champs', 'danger');
             }
 
+        }
+
+        if(isset($_POST)){
             $form = new BootstrapForm($_POST);
+        }
+        else {
+            $form = new BootstrapForm();
         }
         $page_titre ="";
         $description = "";
