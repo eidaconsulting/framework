@@ -389,9 +389,21 @@ label {
     color: #959595;
     margin-top: 0.5rem;
 }
-.is-full-height {
-    min-height: 100vh;
+
+.is-scroll {
+    position: fixed;
+    bottom: 1rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+    background-color: rgba(120,120,120,.5);
+    transition: all 0.5s;
 }
-.is-max-height {
-    height: 100% !important;
+.is-scroll.opacity {
+    display: none;
+    transition: all 0.5s;
 }

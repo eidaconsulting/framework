@@ -1,18 +1,3 @@
-//Gestion des listes
-$(function () {
-    $('<i class="fa fa-star-o pull-left mt-2"></i>').insertBefore("#list-star li");
-    $('<i class="fa fa-caret-right pull-left mt-2"></i>').insertBefore("#list-caret li");
-    $('<i class="fa fa-certificate pull-left mt-2"></i>').insertBefore("#list-certificate li");
-    $('<i class="fa fa-check pull-left mt-2"></i>').insertBefore("#list-check li");
-    $('<i class="fa fa-check-circle pull-left mt-2"></i>').insertBefore("#list-check-circle li");
-    $('<i class="fa fa-check-circle-o pull-left mt-2"></i>').insertBefore("#list-check-circle-o li");
-    $('<i class="fa fa-check-square-o pull-left mt-2"></i>').insertBefore("#list-check-square-o li");
-    $('<i class="fa fa-circle-o pull-left mt-2"></i>').insertBefore("#list-circle-o li");
-    $('<i class="fa fa-circle pull-left mt-2"></i>').insertBefore("#list-circle li");
-    $('<i class="fa fa-code pull-left mt-2"></i>').insertBefore("#list-code li");
-});
-
-
 <!-- affichage des massage d'alerte -->
 $(document).ready(function () {
     $('#alert').slideToggle(500).delay(8000).slideToggle(500);
@@ -42,3 +27,27 @@ $(function () {
 
     });
 });
+
+/* Function pour afficher le bouton pour remonter vers le haut */
+(function(){
+    var div = document.querySelector('.is-scroll');
+    var back = function (){
+        var h = window.scrollY;
+        var hasClass = div.classList.contains('opacity')
+        if(h > 60 && hasClass){
+            div.classList.remove('opacity')
+        }
+        else if (h < 60 && !hasClass) {
+            div.classList.add('opacity')
+        }
+    }
+
+   window.addEventListener("scroll", back);
+
+    var scrollTop = function (e) {
+        e.preventDefault()
+        window.scrollTo(0, 0);
+    }
+
+    div.addEventListener('click', scrollTop)
+})();

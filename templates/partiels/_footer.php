@@ -1,4 +1,7 @@
-<div class="row no-margin"></div>
+<div class="row no-gutters"></div>
+<a href="#0" class="is-scroll opacity">
+    <i class="fas fa-arrow-up"></i>
+</a>
 <footer class="pt-5">
     <div class="container">
         <div class="row no-margin">
