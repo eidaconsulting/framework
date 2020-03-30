@@ -8,7 +8,7 @@
     </li>
     <?php foreach ($categories as $data): ?>
         <li class="categorie-item mb-2">
-            <a href="<?= $this->entity()->blogs('categorie/'.$data->slug.'/'.$data->id) ?>">
+            <a href="<?= $this->entity()->blogs('categorie/'.$data->id.'/'.$data->slug) ?>">
                 <i class="fas fa-arrow-right"></i> <?= $data->category; ?>
             </a>
         </li>

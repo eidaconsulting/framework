@@ -14,7 +14,7 @@
                     <div class="col-md-9">
                         <div class="blog-item-title">
                             <h4 class="is-semibold mt-0 pt-0 mb-2 pb-0">
-                                <a href="<?= $this->entity()->url(); ?>/blogs/<?= $data->slug; ?>/<?= $data->id ?>">
+                                <a href="<?= $this->entity()->blogs($data->id.'/'.$data->slug); ?>">
                                     <?= $data->title; ?>
                                 </a>
                             </h4>

@@ -71,6 +71,5 @@ footer i.fa {
 }
 footer .copyright {
     background-color: var(--light-text-color) !important;
-    padding: .5rem;
-    margin-top: 2rem;
+    padding: .5rem .5rem 0 .5rem;
 }

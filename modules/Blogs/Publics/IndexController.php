@@ -2,13 +2,17 @@
 
 namespace Modules\Blogs\Publics;
 
+
+use Core\Captcha\captcha;
+use Core\Controller\Controller;
 use App\App;
 use Core\Email\Email;
 use Core\Form\BootstrapForm;
 use Core\Pagination\Pagination;
+use Modules\Blogs\AppController;
 
 
-class IndexController extends \App\Controller\AppController
+class IndexController extends AppController
 {
 
     public function __construct() {
@@ -46,7 +50,6 @@ class IndexController extends \App\Controller\AppController
         $pageName = 'Blog';
         $pageUrl = '/blogs';
 
-
         $form = new BootstrapForm($_POST);
 
         $this->render('publics.index', compact('styleCSS', 'javascript',
@@ -80,7 +83,7 @@ class IndexController extends \App\Controller\AppController
 
     }
 
-    public function Single ($slug, $id) {
+    public function Single ($id, $slug) {
 
         $styleCSS = $this->css();
         $javascript = $this->js();
@@ -93,32 +96,39 @@ class IndexController extends \App\Controller\AppController
 
                 if(App::getInstance()->not_empty(['name', 'email', 'comment'])) {
 
-                    extract($this->secureData($_POST));
+                    $captcha =  new captcha();
 
-                    $user_ip = App::getInstance()->getIpAddress();
-                    $this->Comment->MyCreate([
-                        'post_id' => $id,
-                        'name' => $name,
-                        'email' => $email,
-                        'comment' => nl2br($comment),
-                        'user_ip' => $user_ip,
-                    ]);
+                    if ($captcha->verif_captcha() == true) {
 
-                    //Email
-                    $objet = 'Nouveau commentaire sur '.$this->entity()->app_info('app_name');
+                        extract($this->secureData($_POST));
 
-                    $content = '<p>Un nouveau commentaire sur votre publication <strong>'. $this->Blog->MyFind($id)->title .'</strong></p>';
-                    $content .= '<p>Voici le commentaire :</p>';
-                    $content .= '<p>'. nl2br($comment) .'</p>';
-                    $content .= '<p><a href="'. $this->entity()->admins('index') .'">Connecter vous à votre espace administration pour éditer le commentaire.</a> </p>';
+                        $user_ip = App::getInstance()->getIpAddress();
+                        $this->Comment->MyCreate([
+                            'post_id' => $id,
+                            'name' => $name,
+                            'email' => $email,
+                            'comment' => nl2br($comment),
+                            'user_ip' => $user_ip,
+                        ]);
 
-                    $sendEmail = new Email();
+                        //Email
+                        $objet = 'Nouveau commentaire sur ' . $this->entity()->app_info('app_name');
 
-                    $sendEmail->sendEmail($content, '', $objet, $name, $email);
+                        $content = '<p>Un nouveau commentaire sur votre publication <strong>' . $this->Blog->MyFind($id)->title . '</strong></p>';
+                        $content .= '<p>Voici le commentaire :</p>';
+                        $content .= '<p>' . nl2br($comment) . '</p>';
+                        $content .= '<p><a href="' . $this->entity()->admins('index') . '">Connecter vous à votre espace administration pour éditer le commentaire.</a> </p>';
 
-                    unset($_POST);
-                    $this->alertDefine('Votre commentaire a été ajouté avec succès. <br>Il sera soumis à 
+                        $sendEmail = new Email();
+
+                        $sendEmail->sendEmail($content, '', $objet, $name, $email);
+
+                        unset($_POST);
+                        $this->alertDefine('Votre commentaire a été ajouté avec succès. <br>Il sera soumis à 
                                                 l\'approbation de l\'équipe technique', 'success');
+                    }else {
+                        $this->alertDefine('Vous n\'avez pas valider le captcha', 'danger');
+                    }
                 }
                 else {
                     $errors = 'Veuillez remplir tous les champs obligatoire';

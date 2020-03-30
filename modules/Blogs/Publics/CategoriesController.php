@@ -31,7 +31,7 @@ class CategoriesController extends AppController
     }
 
 
-    public function view($slug, $id){
+    public function view($id, $slug){
 
         $styleCSS = $this->css();
         $javascript = $this->js();
@@ -55,7 +55,7 @@ class CategoriesController extends AppController
 
     }
 
-    public function pages($slug, $id, $page){
+    public function pages($id, $slug, $page){
 
         $styleCSS =  $this->css();
         $javascript = $this->js();
@@ -69,7 +69,7 @@ class CategoriesController extends AppController
         $categories = $this->Blogcategorie->MyAll();
         $page_titre = 'Catégorie '.$this->entity()->nameFromID('Blogcategorie', $id)->category;
         $pageName = 'Publications dans : ' . $this->entity()->nameFromID('Blogcategorie', $id)->category;
-        $pageUrl = '/blogs/categorie/'. $slug . '/' . $id;
+        $pageUrl = '/blogs/categorie/'. $id. '/' . $slug  ;
 
         $form = new BootstrapForm($_POST);
 

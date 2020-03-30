@@ -1,7 +1,21 @@
 <div class="row no-gutters"></div>
+<!-- Bouton retour en haut -->
 <a href="#0" class="is-scroll opacity">
     <i class="fas fa-arrow-up"></i>
 </a>
+
+<!-- Cookies -->
+<div class="cookies">
+    <div class="row no-gutters">
+        <div class="col-md-10">
+            <p>En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de [Cookies ou autres traceurs] pour vous proposer [Par exemple, des publicités ciblées adaptés à vos centres d’intérêts] et [Par exemple, réaliser des statistiques de visites].</p>
+        </div>
+        <div class="col-md-2">
+            <a href="" class="btn btn-light btn-sm">Accepter</a>
+        </div>
+    </div>
+</div>
+
 <footer class="pt-5">
     <div class="container">
         <div class="row no-margin">
@@ -76,7 +90,7 @@
     </div>
     <div class="row no-gutters copyright">
         <div class="container">
-            <di class="row no-margin no-padding">
+            <div class="row no-gutters">
                 <div class="col-md-8 small">
                     <?= date('Y') ?> &copy; <?= strtoupper($this->entity()->app_info('company_name')); ?>. <?= $lang->get('copyright'); ?>
                     <span class="">
@@ -102,7 +116,7 @@
                         </li>
                     </ul>
                 </div>
-            </di>
+            </div>
         </div>
     </div>
 </footer>

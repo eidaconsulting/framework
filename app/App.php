@@ -36,6 +36,7 @@
 
                 $this->modules = ['Blogs', 'Paiements'];
 
+
                 if(in_array(ucfirst($modules), $this->modules)){
                     $class_name = '\\Modules\\' . ucfirst($modules) . '\\Table\\'. ucfirst($name). 'Table';
                 }

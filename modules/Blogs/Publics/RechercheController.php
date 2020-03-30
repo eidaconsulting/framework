@@ -76,29 +76,29 @@ class RechercheController extends AppController
 
     public function pages($slug, $id){
 
-            $search = New Search();
-            extract($this->secureData($_POST));
-            $styleCSS =  $this->css();
-            $javascript = $this->js();
+        $search = New Search();
+        extract($this->secureData($_POST));
+        $styleCSS =  $this->css();
+        $javascript = $this->js();
 
-            $nb_vue = 20;
-            $pagination = Pagination::getInstance()->pagination($nb_vue, 'Blog', ['content' => $slug, 'title' => $slug], ' OR ');
-            $currentPage = $id;
-            $nb_page = $pagination['nb_page'];
-            $firstOfListe = ($currentPage - 1) * $nb_vue;
+        $nb_vue = 20;
+        $pagination = Pagination::getInstance()->pagination($nb_vue, 'Blog', ['content' => $slug, 'title' => $slug], ' OR ');
+        $currentPage = $id;
+        $nb_page = $pagination['nb_page'];
+        $firstOfListe = ($currentPage - 1) * $nb_vue;
 
-            $pageUrl = '/blogs/search/'.$slug;
-            $lim = $firstOfListe .', '.$nb_vue;
+        $pageUrl = '/blogs/search/'.$slug;
+        $lim = $firstOfListe .', '.$nb_vue;
 
-            $datas = $search->search('blog', ['content' => $slug, 'title' => $slug], 'OR', $lim);
-            $categories = $this->Blogcategorie->MyAll();
-            $page_titre = 'Resultat pour ' . $slug;
-            $pageName = 'Résultat pour : ' . $slug;
+        $datas = $search->search('blog', ['content' => $slug, 'title' => $slug], 'OR', $lim);
+        $categories = $this->Blogcategorie->MyAll();
+        $page_titre = 'Resultat pour ' . $slug;
+        $pageName = 'Résultat pour : ' . $slug;
 
-            $form = new BootstrapForm($_POST);
+        $form = new BootstrapForm($_POST);
 
-            $this->render('publics.index', compact('styleCSS', 'javascript',
-                'page_titre', 'form', 'datas', 'categories', 'pageName', 'nb_page', 'currentPage', 'pageUrl'));
+        $this->render('publics.index', compact('styleCSS', 'javascript',
+            'page_titre', 'form', 'datas', 'categories', 'pageName', 'nb_page', 'currentPage', 'pageUrl'));
 
     }
 

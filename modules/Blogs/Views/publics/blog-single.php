@@ -36,7 +36,7 @@
                 <a href="#" id="comment-btn" class="btn btn-outline-perso-third btn-sm">Laissez un commentaire</a>
                 <a href="#" id="comment-forget" class="btn btn-outline-danger btn-sm">Ne pas laisser un commentaire</a>
                 <div class="comment-area py-3" id="comment-form">
-                    <form method="post" action="https://www.google.com/recaptcha/api/siteverify">
+                    <form method="post" action="">
                         <?= $form->input('name', '', 'Votre nom', [
                             'required' => 'required'
                         ]); ?>
@@ -47,10 +47,9 @@
                         <?= $form->input('comment', '', 'Votre commentaire', [
                             'type' => 'textarea',
                             'required' => 'required'
-                        ]) ?>
-                        <div class="my-2">
-                            <div class="g-recaptcha" data-sitekey="6Ld-vYcUAAAAAI_zfilxJyQsouB5Fzdm_RXsAlAs"></div>
-                        </div>
+                        ]); ?>
+
+                        <?= $this->entity()->captcha(); ?>
 
                         <?= $form->input('comment-send', '', 'Envoyer mon commentaire', [
                             'type' => 'submit',
@@ -80,12 +79,12 @@
                 <?php foreach($datas as $data): ?>
                     <div class="row">
                         <div class="col py-3">
-                            <a href="<?= $this->entity()->url(); ?>/blogs/<?= $data->slug; ?>/<?= $data->id ?>">
+                            <a href="<?= $this->entity()->blogs($data->id.'/'.$data->slug); ?>">
                                 <img src="<?= $this->entity()->uploads('publication/resize/'.$data->image); ?>"
                                      title="<?= $data->title; ?>" alt="<?= $data->title; ?>" class="img-fluid" width="100%">
                                 <h5><strong><?= $data->title; ?></strong></h5>
                             </a>
-                            <p><?= $data->extrait('100', '[...]', $data->content) ?></p>
+                            <p><?= html_entity_decode($data->extrait('100', '[...]', $data->content)) ?></p>
                         </div>
                     </div>
                 <?php endforeach; ?>
