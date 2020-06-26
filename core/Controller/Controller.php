@@ -217,4 +217,31 @@ class Controller {
         $this->redirection($url);
     }
 
+    /**
+     * Function qui permet de faire le var_dump d'une information. Evite d'ecrire le var_dump
+     * et de faire encore un die() ensuite.
+     * @param array $datas : Les paramètre qui doit être un tableau standard [$valeur]
+     *                     quand il s'agit de plusieurs valeurs, il faut les séparer d'une
+     *                     virgule [$valeur1, $valeur2, ...]
+     */
+    public function dd(array $datas){
+        if(count($datas) > 0){
+            echo '<pre>';
+            foreach ($datas as $data){
+                if(is_array($data)){
+                    echo print_r($data);
+                }
+                else {
+                    var_dump($data);
+                }
+            }
+            echo '</pre>';
+        }
+        else {
+            var_dump($datas);
+        }
+
+        die();
+    }
+
 }

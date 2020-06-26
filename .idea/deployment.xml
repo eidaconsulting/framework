@@ -9,13 +9,6 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="Coursus">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="DestinationCanada">
         <serverdata>
           <mappings>
