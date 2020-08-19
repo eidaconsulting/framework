@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Modules\\' => array($baseDir . '/modules'),
-    'FedaPay\\' => array($vendorDir . '/fedapay/fedapay-php/lib'),
-    'Core\\' => array($baseDir . '/core'),
+    'Core\\' => array($baseDir . '/src'),
     'App\\' => array($baseDir . '/app'),
 );

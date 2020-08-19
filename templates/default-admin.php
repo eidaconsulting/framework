@@ -8,11 +8,6 @@ $entity = new Core\Entity\Entity();
 $entity->notification();
 ?>
 
-    <main role="main" class="container">
-        <div class="my-3 p-3 rounded box-shadow">
-            <?= $content; ?>
-        </div>
-    </main>
+<?= $content; ?>
 
-<?php //include 'partiels/_footer.php'; ?>
 <?php include 'partiels/_foot.php'; ?>

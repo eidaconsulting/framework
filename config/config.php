@@ -27,6 +27,7 @@ return [
     "user" => true,
     "blog" => true,
     "mode" => 'dev', //prod
+    "app_default_lang" => 'fr',
 
     "devise" => 'CFA',
     "poids" => 'Kg',

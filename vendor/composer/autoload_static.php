@@ -11,10 +11,6 @@ class ComposerStaticInit5b71b583dd2f56e8cdcdf11b562ca748
         array (
             'Modules\\' => 8,
         ),
-        'F' => 
-        array (
-            'FedaPay\\' => 8,
-        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -30,13 +26,9 @@ class ComposerStaticInit5b71b583dd2f56e8cdcdf11b562ca748
         array (
             0 => __DIR__ . '/../..' . '/modules',
         ),
-        'FedaPay\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fedapay/fedapay-php/lib',
-        ),
         'Core\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/core',
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'App\\' => 
         array (

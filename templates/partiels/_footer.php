@@ -5,16 +5,18 @@
 </a>
 
 <!-- Cookies -->
+<?php if(!isset($_COOKIE['acceptCookies']) || $_COOKIE['acceptCookies'] != 1 ): ?>
 <div class="cookies">
     <div class="row no-gutters">
         <div class="col-md-10">
             <p>En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de [Cookies ou autres traceurs] pour vous proposer [Par exemple, des publicités ciblées adaptés à vos centres d’intérêts] et [Par exemple, réaliser des statistiques de visites].</p>
         </div>
         <div class="col-md-2">
-            <a href="" class="btn btn-light btn-sm">Accepter</a>
+            <a href="#" class="btn btn-light btn-sm" id="cookiesbtn">Accepter</a>
         </div>
     </div>
 </div>
+<?php endif; ?>
 
 <footer class="pt-5">
     <div class="container">

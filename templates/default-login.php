@@ -6,7 +6,7 @@ $entity = new Core\Entity\Entity();
 $entity->notification();
 ?>
 
-        <?= $content; ?>
+<?= $content; ?>
 
 <?php include 'partiels/_footer.php'; ?>
 <?php include 'partiels/_foot.php'; ?>

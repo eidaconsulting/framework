@@ -4,7 +4,6 @@
 <script src="<?= $this->entity()->js_file('tooltip.min.js'); ?>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.6/holder.min.js"></script>
 <script src="<?= $this->entity()->js_file('social.js'); ?>"></script>
-<script src="<?= $this->entity()->js_file('offcanvas.js'); ?>"></script>
 <script src="<?= $this->entity()->vendor_file('jasny-bootstrap/jasny-bootstrap.min.js'); ?>"></script>
 <script src="<?= $this->entity()->vendor_file('bootstrap/bootstrap.min.js'); ?>"></script>
 <script src="<?= $this->entity()->vendor_file('wow/wow.min.js'); ?>"></script>
