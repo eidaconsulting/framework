@@ -39,6 +39,7 @@ class Cache
     }
 
     /**
+     * Get the cache duration from config.php
      * @return float|int|mixed|null
      */
     private function getCacheLife(){
@@ -61,6 +62,7 @@ class Cache
     }
 
     /**
+     * Generate the cache name
      * @param $value
      * @return string
      */
@@ -69,6 +71,7 @@ class Cache
     }
 
     /**
+     * Get file content
      * @param $file
      * @return false|int
      */
@@ -85,6 +88,7 @@ class Cache
     }
 
     /**
+     * Create the cache file and save in caches folder root/caches
      * @param $content
      * @param $file
      * @return bool|int
@@ -94,6 +98,7 @@ class Cache
     }
 
     /**
+     * Delete cache file after the time is finish.
      * @param $file
      */
     public function deleteFile($file){
@@ -105,7 +110,7 @@ class Cache
     }
 
     /**
-     *
+     * Delete all cache files
      */
     public function deleteAllFile(){
         $files = glob($this->cacheDir.'/*');
@@ -116,6 +121,7 @@ class Cache
 
 
     /**
+     * Recuperation des information qui sont dans le cache
      * @param $content
      * @return mixed
      */

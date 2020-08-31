@@ -54,12 +54,12 @@ class ForgetpwController extends AppController {
                         $content .= '<p><strong><a href="' . $url . '">Reinitialiser mon compte</a></strong></p>';
 
                         $send_email = new Email();
-                        $send_email->sendEmail($content, $email, 'Reinitialisation de votre mot de passe');
+                        $send_email->sendEmail($content,"Reinitialisation de votre mot de passe", $email);
 
                         $this->alertDefine('Un email est envoyer sur <strong>' . $email . '</strong> avec 
 le procedure pour finaliser l\'initialisation de votre mot de passe.', 'success');
 
-                        $redirect = $this->entity()->url();
+                        $redirect = $this->entity()->users('forgetpw');
                         $this->redirection($redirect);
                     }
                     else {

@@ -7,3 +7,5 @@ RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 #RewriteCond %{HTTP_HOST} ^eidaconsulting\.com [NC]
 #RewriteCond %{HTTPS} off
 #RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI}
+
+Options -Indexes

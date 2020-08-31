@@ -1,7 +1,6 @@
 <?php
 ob_start();
 header('Content-Type: text/html; charset=UTF-8');
-date_default_timezone_set('Africa/Porto-Novo');
 setlocale(LC_ALL, 'fr_FR');
 setlocale(LC_ALL, 'fra');
 ?>

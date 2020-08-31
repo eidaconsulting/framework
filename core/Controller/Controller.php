@@ -224,8 +224,8 @@ class Controller {
      *                     quand il s'agit de plusieurs valeurs, il faut les séparer d'une
      *                     virgule [$valeur1, $valeur2, ...]
      */
-    public function dd(array $datas){
-        if(count($datas) > 0){
+    static function dd($datas){
+        if(is_array($datas) && count($datas) > 0){
             echo '<pre>';
             foreach ($datas as $data){
                 if(is_array($data)){

@@ -16,4 +16,6 @@ $router->post('/u/password', "Users#Password");
 
 $router->get('/u/signout', "Users#Signout");
 $router->get('/u/forgetpw', "Users#Forgetpw");
+$router->post('/u/forgetpw', "Users#Forgetpw");
 $router->get('/u/forgetactivate/:id/:token', "Users#Forgetactivate");
+$router->post('/u/forgetactivate/:id/:token', "Users#Forgetactivate");
