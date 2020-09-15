@@ -33,9 +33,10 @@ class Entity
      * @param $texte
      * @return bool|string
      */
-    public function extrait ($longueur, $symbole, $texte)
+    public function extrait (int $longueur, string $symbole, string $texte) :string
     {
-        $text = strip_tags($texte);
+        $text = html_entity_decode($texte);
+        $text = strip_tags($text);
         $text = substr($text, 0, $longueur);
         $text = substr($text, 0, strrpos($text, " "));
         $text = $text . $symbole;
@@ -48,7 +49,7 @@ class Entity
      * @param $datetime : Date au format datatime (AAAA-MM-JJ HH-MM-SS)
      * @return string
      */
-    public function dateFormat ($datetime, $type = null)
+    public function dateFormat (string $datetime, $type = null) :string
     {
         list($date, $time) = explode(" ", $datetime);
         list($year, $month, $day) = explode("-", $date);
@@ -205,13 +206,6 @@ class Entity
         return Config::getInstance()->get('app_url') . '/' . Config::getInstance()->get('upload_directory') . '/' . $url;
     }
 
-    /**
-     * @return mixed|null
-     */
-    public function devise ()
-    {
-        return Config::getInstance()->get('devise');
-    }
 
     /**
      * @param $info
@@ -551,7 +545,7 @@ class Entity
             }
         }
         else {
-            return number_format($money, 0, '', ' ') . ' ' . $this->app_info('devise');
+            return number_format($money, 0, '', ' ') . ' ' . $this->app_info('currency');
         }
     }
 

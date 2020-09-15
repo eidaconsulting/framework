@@ -22,6 +22,7 @@
                 <th>Titre</th>
                 <th>Catégorie</th>
                 <th>Content</th>
+                <th>Vue</th>
                 <th></th>
             </tr>
             </tfoot>
@@ -37,13 +38,28 @@
                     <td><?= $data->title; ?></td>
                     <td><?= $data->nameFromID('Blogcategorie', $data->category_id)->category; ?></td>
                     <td><?= $data->extrait(150, '...', htmlspecialchars_decode($data->content)); ?></td>
+                    <td><?= $data->see; ?></td>
                     <td>
                         <div class="btn-group">
-                            <a href="<?= $this->entity()->blogs('a/index/edit/'.$data->id); ?>"
-                               class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i>
+                            <a href="<?= $this->entity()->blogs('/'.$data->id.'/'.$data->slug); ?>"
+                               class="btn btn-info btn-sm"><i class="fas fa-link"></i>
                             </a>
-                            <a href="<?= $this->entity()->blogs('a/index/delete/'.$data->id); ?>"
-                               class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                            <a href="<?= $this->entity()->blogs('a/index/'.$data->id.'/edit'); ?>"
+                               class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i>
+                            </a>
+
+                            <?php if($data->state == 0): ?>
+                                <a href="<?= $this->entity()->blogs('a/index/'.$data->id.'/activate'); ?>"
+                                   class="btn btn-success btn-sm"><i class="fas fa-check"></i>
+                                </a>
+                            <?php elseif($data->state == 1): ?>
+                                <a href="<?= $this->entity()->blogs('a/index/'.$data->id.'/activate'); ?>"
+                                   class="btn btn-warning btn-sm"><i class="fas fa-times"></i>
+                                </a>
+                            <?php endif; ?>
+
+                            <a href="<?= $this->entity()->blogs('a/index/'.$data->id.'/delete'); ?>"
+                               class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>
                             </a>
                         </div>
                     </td>

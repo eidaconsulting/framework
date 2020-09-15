@@ -29,7 +29,7 @@ return [
     "mode" => 'dev', //prod
     "app_default_lang" => 'fr',
 
-    "devise" => 'CFA',
+    "currency" => 'CFA',
     "poids" => 'Kg',
     "distance" => 'm',
     "volume" => 'm3',

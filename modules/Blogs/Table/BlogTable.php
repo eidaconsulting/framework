@@ -3,6 +3,7 @@
 namespace Modules\Blogs\Table;
 
 use App\App;
+use Core\Entity\Entity;
 use Core\Table\Table;
 
 class BlogTable extends Table
@@ -16,6 +17,16 @@ class BlogTable extends Table
                 'see' => $see
             ]);
         }
+    }
+
+    public function getOnePost($id){
+        $entity = new Entity();
+        $admins_table = $entity->app_info('db_prefix').'admins';
+
+        return $this->MyQuery("SELECT bl.*, ad.name, ad.content as ucontent, ad.picture as upicture FROM meg4_blogs as bl 
+                                LEFT JOIN $admins_table as ad
+                                ON bl.users_id = ad.id
+                                WHERE bl.id = ?", [$id], true);
     }
 
 }

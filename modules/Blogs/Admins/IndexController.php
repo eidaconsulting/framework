@@ -1,234 +1,254 @@
 <?php
 
-namespace Modules\Blogs\Admins;
+namespace Modules\Blogs\Publics;
+
 
 use App\App;
+use Core\Captcha\captcha;
+use Core\Email\Email;
+use Core\Form\BootstrapForm;
+use Core\Pagination\Pagination;
 use Modules\Blogs\AppController;
-use \Core\Form\BootstrapForm;
-use Core\Upload\Upload;
 
-class IndexController extends AppController {
 
-    public function __construct() {
+class IndexController extends AppController
+{
+
+    public function __construct ()
+    {
         parent::__construct();
-
-        $this->loadModel('Blog');
         $this->loadModel('Blogcategorie');
+        $this->loadModel('Blog');
+        $this->loadModel('Comment');
     }
 
-    public function css(){
-        $css = '<link href="'.$this->entity()->vendor_file("dataTables/datatables.min.css").'" rel="stylesheet">';
-        $css .= '<link href="'.$this->entity()->vendor_file("summernote/summernote.css").'" rel="stylesheet">';
-        $css .= '<link href="'.$this->entity()->vendor_file("summernote/summernote-bs4.css").'" rel="stylesheet">';
+    public function css ()
+    {
+        $css = '<link href="' . $this->entity()->css_file("comment.css") . '" rel="stylesheet">';
         return $css;
     }
 
-    public function js(){
-        $js = '<script src="'.$this->entity()->vendor_file("dataTables/datatables.min.js").'"></script>';
-        $js .= '<script> 
-                            $(function() {
-                                $(\'#datatable\').DataTable({
-                                    responsive: true
-                                });
-                            });
-                        </script>';
-        $js .= '<script src="'.$this->entity()->vendor_file("summernote/summernote.min.js").'"></script>';
-        $js .= '<script src="'.$this->entity()->vendor_file("summernote/summernote-bs4.min.js").'"></script>';
-        $js .= '<script src="'.$this->entity()->vendor_file("summernote/summernote-cleaner.js").'"></script>';
-        $js .= '<script src="'.$this->entity()->js_file("my.summernote.js").'"></script>';
+    public function js ()
+    {
+        $js = '<script src="' . $this->entity()->js_file("comment.js") . '"></script>';
         return $js;
     }
 
-    public function View(){
 
-        $this->Auth()->isNotLogin('a');
+    public function view ()
+    {
 
-        $styleCSS =  $this->css();
-        $javascript = $this->js();
+        $page_titre = 'Blog megatech';
+        $nb_vue = 20;
+        $pagination = Pagination::getInstance()->pagination($nb_vue, 'Blog', ['state' => 1]);
+        $currentPage = $pagination['currentPage'];
+        $nb_page = $pagination['nb_page'];
+        $firstOfListe = ($currentPage - 1) * $nb_vue;
 
+        $datas = $this->Blog->MyLim($firstOfListe, $nb_vue, ['state' => 1]);
+        $categories = $this->Blogcategorie->MyAll();
+        $pageName = 'Blog';
+        $pageUrl = '/blogs';
 
-        $page_titre = 'Gestion de vos publications';
+        $form = new BootstrapForm($_POST);
 
-        $datas = $this->Blog->MyAll();
-
-        $this->render('admins.index', compact('page_titre', 'styleCSS',
-            'javascript', 'datas'));
+        $this->render('publics.index', compact(
+            'page_titre', 'form', 'datas', 'categories', 'pageName', 'currentPage', 'nb_page',
+            'pageUrl'));
 
     }
 
-    public function Create() {
+    public function pages ($id)
+    {
 
-        $this->Auth()->isNotLogin('a');
-        $styleCSS =  $this->css();
-        $javascript = $this->js();
+        $page_titre = 'Blog d\'entreprise';
 
-        $sendPicture = new Upload();
+        $nb_vue = 20;
+        $pagination = Pagination::getInstance()->pagination($nb_vue, 'Blog', ['state' => 1]);
+        $currentPage = $id;
+        $nb_page = $pagination['nb_page'];
+        $firstOfListe = ($currentPage - 1) * $nb_vue;
 
-        if(isset($_POST) && array_key_exists('create', $_POST)){
+        $datas = $this->Blog->MyLim($firstOfListe, $nb_vue, ['state' => 1]);
+        $categories = $this->Blogcategorie->MyAll();
+        $pageName = 'Blog';
+        $pageUrl = '/blogs';
 
-            extract($this->secureData($_POST));
+        $form = new BootstrapForm($_POST);
 
-            if(App::getInstance()->not_empty(['title', 'category_id', 'content'])) {
+        $this->render('publics.index', compact(
+            'page_titre', 'form', 'datas', 'categories', 'pageName', 'currentPage', 'nb_page',
+            'pageUrl'));
 
-                if($this->Blog->MyInUse(['title' => $title]) < 1){
+    }
 
-                    $id = $this->Blog->MyNewId();
+    public function Single ($id, $slug)
+    {
 
-                    $image = $sendPicture->savePicture('image', $id, [
-                        'autorist_file_type' => 'picture',
-                        'file_name' => strtolower($this->entity()->app_info('app_name')).'-blog',
-                        'directory' => 'publication',
-                        'resize' => 'true',
-                        'resize_type' => 'center',
-                        'resize_w_size' => 500,
-                        'resize_h_size' => 250
-                    ]);
+        if (isset($id) && (int)$id != 0) {
 
+            if (isset($_POST) && array_key_exists('comment-send', $_POST)) {
 
-                    if (is_null($image)) {
-                        $this->alertDefine('Veuillez charger une image', 'danger');
-                    }
-                    elseif(is_array($image)){
-                        $this->alertDefine($image, 'danger');
-                    }
-                    else {
-                        //Insertion de l'information de la base de données
-                        $this->Blog->MyCreate([
-                            'title' => $title,
-                            'category_id' => $category_id,
-                            'content' => $content,
-                            'image' => $image,
-                            'slug' => $this->slug($title)
+                $errors = null;
+
+                if (App::getInstance()->not_empty(['name', 'email', 'comment'])) {
+
+                    $captcha = new captcha();
+
+                    if ($captcha->verif_captcha() == true) {
+
+                        extract($this->secureData($_POST));
+
+                        $user_ip = App::getInstance()->getIpAddress();
+                        $this->Comment->MyCreate([
+                            'post_id' => $id,
+                            'name' => $name,
+                            'email' => $email,
+                            'comment' => nl2br($comment),
+                            'user_ip' => $user_ip,
                         ]);
-                        $this->alertDefine('Ligne ajoutée avec succès', 'success');
 
-                        $url = $this->entity()->blogs('a/index');
+                        //Email
+                        $objet = 'Nouveau commentaire sur ' . $this->entity()->app_info('app_name');
+
+                        $content = '<p>Un nouveau commentaire sur votre publication <strong>' . $this->Blog->MyFind($id)->title . '</strong></p>';
+                        $content .= '<p>Voici le commentaire :</p>';
+                        $content .= '<p>' . nl2br($comment) . '</p>';
+                        $content .= '<p><a href="' . $this->entity()->admins('index') . '">Connecter vous à votre espace administration pour éditer le commentaire.</a> </p>';
+
+                        $sendEmail = new Email();
+
+                        $sendEmail->sendEmail($content, '', $objet, $name, $email);
+
+                        unset($_POST);
+                        $this->alertDefine('Votre commentaire a été ajouté avec succès. <br>Il sera soumis à 
+                                                l\'approbation de l\'équipe technique', 'success');
+
+                        $url = $this->entity()->blogs($id . '/' . $slug);
                         $this->redirection($url);
 
+                    } else {
+                        $this->alertDefine('Vous n\'avez pas valider le captcha', 'danger');
                     }
+                } else {
+                    $errors = 'Veuillez remplir tous les champs obligatoire';
                 }
-                else {
-                    $this->alertDefine('Ce titre existe déjà.', 'danger');
-                }
-
             }
-            else {
-                $this->alertDefine('Veuillez remplir tous les champs obligatoires', 'danger');
-            }
-        }
-        else {
-            $page_titre = 'Ajouter une publication';
 
-            $form = new BootstrapForm($_POST);
+            if (isset($_POST) && array_key_exists('comment-response-send', $_POST)) {
 
-            $categories = $this->Blogcategorie->MyExtract('id', 'category');
+                $errors = null;
 
-            $this->render('admins.index-create', compact('form', 'page_titre',
-                'styleCSS', 'javascript', 'categories'));
-        }
+                if (App::getInstance()->not_empty(['name', 'email', 'comment'])) {
 
-    }
+                    $captcha = new captcha();
 
-    public function Edit($id) {
+                    if ($captcha->verif_captcha() == true) {
 
-        $this->Auth()->isNotLogin('a');
-        $styleCSS =  $this->css();
-        $javascript = $this->js();
-        $sendPicture = new Upload();
+                        extract($this->secureData($_POST));
 
-        if(isset($id) && (int)$id !== 0){
-
-            if(isset($_POST) && array_key_exists('edit', $_POST)){
-                extract($this->secureData($_POST));
-
-                $id = htmlspecialchars($id);
-
-                if(App::getInstance()->not_empty(['title', 'category_id', 'content'])) {
-
-                    if($this->Blog->MyInUse(['title' => $title], $id) < 1){
-
-                        $image = $sendPicture->savePicture('image', $id, [
-                            'autorist_file_type' => 'picture',
-                            'file_name' => strtolower($this->entity()->app_info('app_name')).'-blog',
-                            'directory' => 'publication',
-                            'resize' => 'true',
-                            'resize_type' => 'center',
-                            'resize_w_size' => 500,
-                            'resize_h_size' => 250
+                        $user_ip = App::getInstance()->getIpAddress();
+                        $this->Comment->MyCreate([
+                            'post_id' => $id,
+                            'name' => $name,
+                            'email' => $email,
+                            'comment' => nl2br($comment),
+                            'comments_id' => $comments_id,
+                            'user_ip' => $user_ip,
                         ]);
 
+                        $post = $this->Blog->MyFind($id);
+                        $post_title = $post->title;
+                        $post_slug = $post->slug;
 
-                        if (is_null($image)) {
-                            $image = $this->Blog->MyFind($id)->image;
-                        }
+                        //Email pour administrateur
+                        $objet = 'Nouveau réponse sur ' . $this->entity()->app_info('app_name');
 
-                        if(is_array($image)){
-                            $this->alertDefine($image, 'danger');
-                        }
-                        else {
+                        $content = '<p>Une nouvelle réponse sur le commentaire suivant : </p>';
+                        $content .= '<p>----------------------------------------------------------------</p>';
+                        $content .= '<p><em>'. $this->Comment->MyFind($comments_id)->comment .' </em></p>';
+                        $content .= '<p>La publication concernée est : <strong><a href="' . $this->entity()->blogs($id.'/'.$post_slug) . '">' . $post_title . '</strong></a></p>';
+                        $content .= '<p>Voici la réponse :</p>';
+                        $content .= '<p>--------------------------------------------</p>';
+                        $content .= '<p><em>' . nl2br($comment) . '</em></p>';
+                        $content .= '<p>--------------------------------------------</p>';
+                        $content .= '<p><a href="' . $this->entity()->admins('index') . '">Connecter vous à votre espace administration pour éditer le commentaire.</a> </p>';
 
-                            //Insertion de l'information de la base de données
-                            $this->Blog->MyUpdate($id, [
-                                'title' => $title,
-                                'category_id' => $category_id,
-                                'content' => $content,
-                                'image' => $image,
-                                'slug' => $this->slug($title)
-                            ]);
+                        $sendEmail = new Email();
+                        $sendEmail->sendEmail($content, $objet, null, $name, $email);
 
-                            $this->alertDefine('Publication modifiée avec succès', 'success');
+                        //Email pour auteur du commentaire
+                        $objet = 'Nouveau réponse à votre commentaire sur ' . $this->entity()->app_info('app_name');
 
-                            $url = $this->entity()->blogs('a/index');
-                            $this->redirection($url);
-                        }
+                        $content = '<p>Une nouvelle réponse sur votre commentaire suivant : </p>';
+                        $content .= '<p>----------------------------------------------------------------</p>';
+                        $content .= '<p><em>'. $this->Comment->MyFind($comments_id)->comment .' </em></p>';
+                        $content .= '<p>La publication concernée est : <strong><a href="' . $this->entity()->blogs($id.'/'.$post_slug) . '">' . $post_title . '</strong></a></p>';
+                        $content .= '<p>Voici la réponse :</p>';
+                        $content .= '<p>--------------------------------------------</p>';
+                        $content .= '<p><em>' . nl2br($comment) . '</em></p>';
+                        $content .= '<p>--------------------------------------------</p>';
+                        $content .= '<p>Rendez-vous sur la publication pour lire la réponse si l\'administrateur l\'a déjà rendu public.</p>';
+                        $content .= '<p>Cordialement <br> <strong>MEGATECH</strong></p>';
+
+                        $sendEmail->sendEmail($content, $objet, $users_email);
+
+                        unset($_POST);
+                        $this->alertDefine('Votre réponse a été envoyée avec succès. <br>Elle sera soumise à 
+                                                l\'approbation de l\'équipe technique', 'success');
+
+                        $url = $this->entity()->blogs($id . '/' . $slug);
+                        $this->redirection($url);
+
+                    } else {
+                        $this->alertDefine('Vous n\'avez pas valider le captcha', 'danger');
                     }
-                    else {
-                        $this->alertDefine('Une publication avec ce titre existe déjà', 'danger');
-                    }
-
-                }
-                else {
-                    $this->alertDefine('Veuillez remplir tous les champs obligatoires', 'danger');
+                } else {
+                    $errors = 'Veuillez remplir tous les champs obligatoire';
                 }
             }
 
-            else {
-                $page_titre = 'Modifier une publication';
+            $data = $this->Blog->getOnePost($id);
 
-                $find = $this->Blog->MyFind($id);
-                $form = new BootstrapForm($find);
-                $categories = $this->Blogcategorie->MyExtract('id', 'category');
+            if ($data != null) {
+                $others = $this->Blog->MyOthers(['category_id' => $data->category_id, 'state' => 1], $id, '0,3');
+                $categories = $this->Blogcategorie->MyAll();
+                $comments = $this->Comment->MyAll(['state' => 1, 'post_id' => $id]);
+                $count_comments = count($comments);
+                $description = $this->entity()->extrait(250, ' ...', $data->content);
+                $page_titre = $data->title;
+                $og_picture = $this->entity()->uploads('publication/' . $data->image);
 
-                $this->render('admins.index-edit', compact('form', 'page_titre',
-                    'javascript', 'styleCSS', 'categories'));
+                $comments_by_id = [];
+                $datas = [];
+                foreach ($comments as $comment){
+                    if (is_null($comment->comments_id)) {
+                        $comments_by_id[$comment->id] = $comment;
+                    }
+                }
+
+                foreach ($comments as $k => $comment) {
+                    if (!is_null($comment->comments_id)) {
+                        $comments_by_id[$comment->comments_id]->children[] = $comment;
+                    }
+                }
+
+
+                if ($count_comments > 1) {
+                    $nb_comments = '0' . $count_comments . ' commentaires';
+                } else {
+                    $nb_comments = '0' . $count_comments . ' commentaire';
+                }
+
+                $this->Blog->Mysee($id);
+
+                $form = new BootstrapForm($_POST);
+
+                $this->render('publics.blog-single', compact('page_titre', 'description', 'form', 'styleCSS',
+                    'javascript', 'data', 'datas', 'categories', 'nb_comments', 'og_picture', 'comments_by_id'));
+            } else {
+                $this->notFound();
             }
-
         }
-        else {
-            $this->notFound();
-        }
-    }
-
-    public function Delete($id) {
-
-        $this->Auth()->isNotLogin('a');
-
-        if(isset($id) && (int)$id !== 0){
-
-            extract($this->secureData($_POST));
-
-            $this->Blog->MyDelete($id);
-
-            $this->alertDefine('Publication supprimer avec succes');
-
-            $url = $this->entity()->blogs('a/index');
-            $this->redirection($url);
-
-        }
-        else {
-            $this->notFound();
-        }
-
-
     }
 }
