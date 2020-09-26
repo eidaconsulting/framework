@@ -63,7 +63,7 @@ $(function () {
             url: url,
             success: function () {
                 cookies.hide();
-            },s
+            },
             error: function() {}
         })
 

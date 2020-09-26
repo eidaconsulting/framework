@@ -9,6 +9,7 @@ return [
     "db_prefix" => "my_",
 
     "app_url" => 'http://myframework.test',
+    "app_domaine" => 'myframework.test',
     "app_name" => 'EIDA CONSULTING',
     "app_email" => 'contact@eidaconsulting.com',
     "app_slogan" => 'Nous faisons du Web un allié pour votre succès',
