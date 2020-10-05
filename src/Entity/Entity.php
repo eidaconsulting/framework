@@ -13,12 +13,11 @@ use Core\Config;
 class Entity
 {
     /**
+     * Function permettant de d'ajouter automatiquement un get a une methode qu'on appel et qui n'existe pas
+     * Exemple : si j'appel $article->url, automatiquement cette function appelle la methode
+     * $article->getUrl()
      * @param $key : Le nom de la clé ou de l'evenement appelé
      * @return mixed
-     *             Function permettant de d'ajouter automatiquement un get a une methode qu'on appel et qui n'existe
-     *             pas
-     *             Exemple : si j'appel $article->url, automatiquement cette function appelle la methode
-     *             $article->getUrl()
      */
     public function __get ($key)
     {
@@ -27,19 +26,52 @@ class Entity
         return $this->$key;
     }
 
+
     /**
-     * @param $longueur
-     * @param $symbole
-     * @param $texte
-     * @return bool|string
+     * It Display money depending on the currency
+     * @param int $money : The money you want to display
+     * @param string $currency : The currency ($, dollar, € or euro)
+     * @return string : return the money converted according to the
+     *                  currency with the correct format
      */
-    public function extrait (int $longueur, string $symbole, string $texte) :string
+    public function getCurrency (int $money, string $currency = ''): string
     {
-        $text = html_entity_decode($texte);
+        if ($currency != '') {
+            if ($currency === '€' || $currency === 'euro') {
+                return '€ ' . number_format($money / 655.96, 2, ',', ' ');
+            } elseif ($currency === '$' || $currency === 'dollar') {
+                return '$ ' . number_format($money / 595.24, 2, ',', '.');
+            }
+        } else {
+            return number_format($money, 0, '', ' ') . ' ' . $this->app_info('currency');
+        }
+    }
+
+    /**
+     * To get any information in the config file
+     * @param $info : is the array key in the config file
+     * @return mixed|null
+     */
+    public function app_info ($info)
+    {
+        return Config::getInstance()->get($info);
+    }
+
+    /**
+     * Allows to retrieve an extract from a text
+     * @param $length  : the number of characters we want to display in the text.
+     * @param $mark    : the mark to put at the end of the text to signify that
+     *                 it continues and that it is part of an even longer text
+     * @param $content : the text of which we want to display a part
+     * @return string : Return the shortened text
+     */
+    public function getExtract (int $length, string $mark, string $content): string
+    {
+        $text = html_entity_decode($content);
         $text = strip_tags($text);
-        $text = substr($text, 0, $longueur);
+        $text = substr($text, 0, $length);
         $text = substr($text, 0, strrpos($text, " "));
-        $text = $text . $symbole;
+        $text = $text . $mark;
         return $text;
     }
 
@@ -49,7 +81,7 @@ class Entity
      * @param $datetime : Date au format datatime (AAAA-MM-JJ HH-MM-SS)
      * @return string
      */
-    public function dateFormat (string $datetime, $type = null) :string
+    public function dateFormat (string $datetime, $type = null): string
     {
         list($date, $time) = explode(" ", $datetime);
         list($year, $month, $day) = explode("-", $date);
@@ -204,16 +236,6 @@ class Entity
     public function uploads ($url)
     {
         return Config::getInstance()->get('app_url') . '/' . Config::getInstance()->get('upload_directory') . '/' . $url;
-    }
-
-
-    /**
-     * @param $info
-     * @return mixed|null
-     */
-    public function app_info ($info)
-    {
-        return Config::getInstance()->get($info);
     }
 
     /**
@@ -382,13 +404,15 @@ class Entity
     }
 
     /**
+     * Return active class if is current nav item
+     *
      * @param $param
      * @return string
      */
-    public function nav_actif ($param)
+    public function is_current (string $param): string
     {
         if (isset($_GET['url']) && $_GET['url'] == $param) {
-            return 'actif';
+            return 'active';
         }
     }
 
@@ -526,27 +550,6 @@ class Entity
     public function captcha ()
     {
         return '<div class="g-recaptcha" data-sitekey="' . Config::getInstance()->get("captcha_site_key") . '"></div>';
-    }
-
-    /**
-     * it Display money depending on the currency
-     * @param int           $money : The money you want to display
-     * @param string|string $currency : The currency ($, dollar, € or euro)
-     * @return string                  : return the money converted according to the
-     *                                 currency with the correct format
-     */
-    public function getCurrency(int $money, string $currency = ''):string {
-        if($currency != ''){
-            if($currency === '€' || $currency === 'euro'){
-                return '€ ' . number_format($money/655.96, 2, ',', ' ');
-            }
-            elseif ($currency === '$' || $currency === 'dollar') {
-                return '$ ' . number_format($money/595.24, 2, ',', '.');
-            }
-        }
-        else {
-            return number_format($money, 0, '', ' ') . ' ' . $this->app_info('currency');
-        }
     }
 
 
