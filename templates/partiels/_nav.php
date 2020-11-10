@@ -20,13 +20,13 @@
                         <?php endif; ?>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link <?= $this->entity()->nav_actif('/'); ?>" href="<?= $this->entity()->url(); ?>"><?= $lang->get('accueil'); ?></a>
+                        <a class="nav-link <?= $this->entity()->is_current('/'); ?>" href="<?= $this->entity()->url(); ?>"><?= $lang->get('accueil'); ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $this->entity()->nav_actif('blog'); ?>" href="<?= $this->entity()->blogs(); ?>">Blog</a>
+                        <a class="nav-link <?= $this->entity()->is_current('blog'); ?>" href="<?= $this->entity()->blogs(); ?>">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $this->entity()->nav_actif('contacts'); ?> signup-btn" href="<?= $this->entity()->publics('contacts'); ?>">Contacts</a>
+                        <a class="nav-link <?= $this->entity()->is_current('contacts'); ?> signup-btn" href="<?= $this->entity()->publics('contacts'); ?>">Contacts</a>
                     </li>
                 </ul>
             </div>

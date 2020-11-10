@@ -15,14 +15,17 @@ class Cache
      * @var string
      */
     private $cacheDir = '../cacheFile';
+
     /**
      * @var string
      */
     private $cacheExt = '.html';
+
     /**
      * @var
      */
     private $cacheExp;
+
     /**
      * @var
      */

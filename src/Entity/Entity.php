@@ -371,7 +371,7 @@ class Entity
                         } else {
                             $css = null;
                         }
-                        echo '<a class="dropdown-item ' . $css . ' ' . $this->nav_actif($key) . '"  href="' . $this->$type($key) . '">' . $value[0] . '</a>';
+                        echo '<a class="dropdown-item ' . $css . ' ' . $this->is_current($key) . '"  href="' . $this->$type($key) . '">' . $value[0] . '</a>';
                     }
 
                     echo '
@@ -388,7 +388,7 @@ class Entity
                     }
                     echo '
                     <li class="nav-item">
-                        <a class="nav-link ' . $css . ' ' . $this->nav_actif($k) . '" href="' . $this->$type($k) . '">' . $item[0] . '</a>
+                        <a class="nav-link ' . $css . ' ' . $this->is_current($k) . '" href="' . $this->$type($k) . '">' . $item[0] . '</a>
                     </li>
                 ';
                 }
@@ -413,6 +413,9 @@ class Entity
     {
         if (isset($_GET['url']) && $_GET['url'] == $param) {
             return 'active';
+        }
+        else {
+            return '';
         }
     }
 
@@ -537,7 +540,7 @@ class Entity
             $fichier = str_replace(";", "protect", $fichier);
             $fichier = str_replace("%", "protect", $fichier);
 
-            $file = ROOT . $fichier;
+            $file = $fichier;
 
             return $file;
 

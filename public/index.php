@@ -14,7 +14,7 @@ if(!isset($_GET['url'])) {
     $_GET['url'] = null;
 }
 
-
+var_dump($_GET['url']);
 
 $router = new \Core\Router\Router($_GET['url']);
 $router->get('/', 'Publics#index');
@@ -25,7 +25,7 @@ $router->post('/contacts', 'Publics#contacts');
 
 include $entity->mega_include(ROOT."/roots/adminsRoot");
 include $entity->mega_include(ROOT."/roots/usersRoot");
-include $entity->mega_include(ROOT."/Blogs/Root/blogRoot");
+include $entity->mega_include(ROOT."/roots/blogRoot");
 //include '../modules/Paiements/Root/paiementsRoot.php';
 
 $router->run();
