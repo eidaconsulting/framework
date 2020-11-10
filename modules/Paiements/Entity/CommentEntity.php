@@ -2,8 +2,8 @@
 
 namespace Modules\Paiements\Entity;
 
-use Core\Entity\Entity;
+use Globals\GlobalEntity;
 
-class CommentEntity extends Entity
+class CommentEntity extends GlobalEntity
 {
 }

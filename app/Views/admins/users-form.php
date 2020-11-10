@@ -1,4 +1,3 @@
-
 <a href="<?= $this->entity()->admins('users'); ?>" class="btn btn-success pull-right">Retour vers ma liste</a>
 <h4 class="is-block-title"><?= $action; ?> un utilisateur</h4>
 <hr>

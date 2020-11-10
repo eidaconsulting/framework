@@ -527,7 +527,7 @@ class Entity
      * @param string $fichier
      * @return mixed
      */
-    public function mInclude (string $fichier)
+    public function mega_include (string $fichier)
     {
         if (!empty($fichier)) {
             $fichier = trim($fichier . ".php");

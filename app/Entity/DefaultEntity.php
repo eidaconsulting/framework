@@ -2,10 +2,8 @@
 
 namespace App\Entity;
 
-use App\App;
-use Core\Entity\Entity;
-use Core\Config;
+use Globals\GlobalEntity;
 
-class DefaultEntity extends Entity
+class DefaultEntity extends GlobalEntity
 {
 }

@@ -2,9 +2,9 @@
 
 namespace App\Table;
 
-use Core\Table\Table;
+use Globals\GlobalTable;
 
-class VisiteTable extends Table
+class VisiteTable extends GlobalTable
 {
 
 

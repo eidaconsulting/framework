@@ -4,8 +4,6 @@ namespace Modules\Blogs\Publics;
 
 
 use Core\Caches\Cache;
-use Core\Controller\Controller;
-use App\App;
 use Core\Form\BootstrapForm;
 use Core\Search\Search;
 use Core\Pagination\Pagination;

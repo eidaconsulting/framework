@@ -4,7 +4,6 @@ namespace App\Controller\Admins;
 
 use App\App;
 use \Core\Form\BootstrapForm;
-use Core\Email\Email;
 
 class UsersController extends \App\Controller\AppController {
 

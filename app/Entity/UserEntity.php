@@ -2,11 +2,9 @@
 
 namespace App\Entity;
 
-use App\App;
-use Core\Entity\Entity;
-use Core\Config;
+use Globals\GlobalEntity;
 
-class UserEntity extends Entity
+class UserEntity extends GlobalEntity
 {
     public function url()
     {

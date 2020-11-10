@@ -6,11 +6,11 @@ namespace Modules\Blogs;
 
 use App\App;
 use \Core\Auth\DBAuth;
-use Core\Controller\Controller;
 use Core\Entity\Entity;
+use Globals\GlobalController;
 
 
-class AppController extends Controller {
+class AppController extends GlobalController {
 
     protected $template = 'default';
 

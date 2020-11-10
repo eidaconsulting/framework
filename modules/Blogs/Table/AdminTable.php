@@ -2,9 +2,9 @@
 
 namespace Modules\Blogs\Table;
 
-use Core\Table\Table;
+use Globals\GlobalTable;
 
-class AdminTable extends Table
+class AdminTable extends GlobalTable
 {
     public function userInfo($id)
     {

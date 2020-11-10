@@ -4,9 +4,9 @@ namespace Modules\Blogs\Table;
 
 use App\App;
 use Core\Entity\Entity;
-use Core\Table\Table;
+use Globals\GlobalTable;
 
-class BlogTable extends Table
+class BlogTable extends GlobalTable
 {
     public function defUpdateSee($id){
         $see = $this->MyFind($id);

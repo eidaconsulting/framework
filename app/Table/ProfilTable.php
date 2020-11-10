@@ -2,10 +2,9 @@
 
 namespace App\Table;
 
-use App\App;
-use Core\Table\Table;
+use Globals\GlobalTable;
 
-class ProfilTable extends Table
+class ProfilTable extends GlobalTable
 {
 
 }

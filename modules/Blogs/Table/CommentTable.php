@@ -2,9 +2,9 @@
 
 namespace Modules\Blogs\Table;
 
-use Core\Table\Table;
+use Globals\GlobalTable;
 
-class CommentTable extends Table
+class CommentTable extends GlobalTable
 {
 
 }

@@ -1,6 +1,10 @@
 13/08/2020
 =====================
 1. Add in config.php the default language param. The name of param is "app_default_lang"
-2. Edit the line 88 in Core/i18n/i18n.php
+2. Edit the line 88 in src/i18n/i18n.php
     Older line : $this->session = 'fr';
     New line : $this->session = Config::getInstance()->get('app_default_lang');
+
+11/11/2020
+======================
+1. Delete core folder.

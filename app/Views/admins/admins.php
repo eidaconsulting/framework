@@ -1,4 +1,3 @@
-
 <a href="<?= $this->entity()->admins('admin/create'); ?>" class="btn btn-success pull-right">Ajouter un administrateur</a>
 <h4 class="is-block-title">Liste des administrateurs</h4>
 <hr>

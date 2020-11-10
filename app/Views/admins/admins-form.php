@@ -1,4 +1,3 @@
-
 <a href="<?= $this->entity()->admins('admin') ?>" class="btn btn-success pull-right">Retour</a>
 <h4 class="is-block-title"><?= $action; ?> un administrateur</h4>
 <hr>

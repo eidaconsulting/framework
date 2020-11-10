@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admins;
 
-use Core\Auth\DBAuth;
 use Core\Form\BootstrapForm;
 use App\App;
 

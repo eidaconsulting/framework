@@ -3,7 +3,6 @@
 namespace App\Controller\Publics;
 
 use Core\Captcha\captcha;
-use Core\Controller\Controller;
 use App\App;
 use Core\Email\Email;
 use Core\Form\BootstrapForm;

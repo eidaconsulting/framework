@@ -11,6 +11,10 @@ class ComposerStaticInit5b71b583dd2f56e8cdcdf11b562ca748
         array (
             'Modules\\' => 8,
         ),
+        'G' => 
+        array (
+            'Global\\' => 7,
+        ),
         'C' => 
         array (
             'Core\\' => 5,
@@ -25,6 +29,10 @@ class ComposerStaticInit5b71b583dd2f56e8cdcdf11b562ca748
         'Modules\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules',
+        ),
+        'Global\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/global',
         ),
         'Core\\' => 
         array (

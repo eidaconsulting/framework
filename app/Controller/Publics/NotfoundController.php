@@ -2,7 +2,6 @@
 
 namespace App\Controller\Publics;
 
-
 class NotfoundController extends \App\Controller\AppController {
 
     public function __construct() {

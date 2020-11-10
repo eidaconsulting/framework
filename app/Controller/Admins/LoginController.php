@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admins;
 
-use App\App;
 use \Core\Form\BootstrapForm;
 
 class LoginController extends \App\Controller\AppController {

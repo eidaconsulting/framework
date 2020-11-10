@@ -55,9 +55,9 @@ $(function () {
 $(function () {
     //Domaine d'activité et activité
     $ ('#cookiesbtn').click (function (e) {
-        e.reventDefault ();
+        e.preventDefault()
         var cookies = $ (".cookies");
-        var url = 'https://noree.bj/assets/ajax/cookies.php'
+        var url = 'http://myframework.test/assets/ajax/cookies.php'
         $.ajax ({
             url: url,
             success: function () {

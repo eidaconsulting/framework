@@ -2,8 +2,8 @@
 
 namespace Modules\Blogs\Entity;
 
-use Core\Entity\Entity;
+use Globals\GlobalEntity;
 
-class BlognewsletterEntity extends Entity
+class BlognewsletterEntity extends GlobalEntity
 {
 }

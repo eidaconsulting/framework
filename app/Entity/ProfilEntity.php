@@ -2,11 +2,9 @@
 
 namespace App\Entity;
 
-use App\App;
-use Core\Entity\Entity;
-use Core\Config;
+use Globals\GlobalEntity;
 
-class ProfilEntity extends Entity
+class ProfilEntity extends GlobalEntity
 {
     public function url()
     {

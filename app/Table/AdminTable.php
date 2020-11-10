@@ -1,17 +1,17 @@
 <?php
 
-    namespace App\Table;
+namespace App\Table;
 
-    use Core\Table\Table;
+use Globals\GlobalTable;
 
-    class AdminTable extends Table
+class AdminTable extends GlobalTable
+{
+
+    public function userInfo ($id)
     {
-        
-        public function userInfo($id)
-        {
-            foreach ($this->MyFind($id) AS $k => $v) {
-                $_SESSION[$k] = $v;
-            };
+        foreach ($this->MyFind($id) as $k => $v) {
+            $_SESSION[$k] = $v;
         }
-
     }
+
+}

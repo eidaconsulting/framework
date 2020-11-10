@@ -2,10 +2,10 @@
 
 namespace App\Table;
 
-use App\App;
-use Core\Table\Table;
 
-class UserTable extends Table
+use Globals\GlobalTable;
+
+class UserTable extends GlobalTable
 {
 
 }

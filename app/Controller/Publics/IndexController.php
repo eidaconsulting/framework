@@ -2,8 +2,6 @@
 
 namespace App\Controller\Publics;
 
-use Core\Controller\Controller;
-use App\App;
 use Core\Form\BootstrapForm;
 
 class IndexController extends \App\Controller\AppController {

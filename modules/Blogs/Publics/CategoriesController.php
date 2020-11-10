@@ -2,9 +2,6 @@
 
 namespace Modules\Blogs\Publics;
 
-
-use Core\Controller\Controller;
-use App\App;
 use Core\Form\BootstrapForm;
 use Core\Pagination\Pagination;
 use Modules\Blogs\AppController;

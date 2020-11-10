@@ -1,4 +1,3 @@
-
 <h4 class="is-block-title">Changer de mot de passe</h4>
 <hr>
 <div class="row no-margin">
