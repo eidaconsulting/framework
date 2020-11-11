@@ -227,12 +227,12 @@ class Controller {
     static function dd($datas){
         if(is_array($datas) && count($datas) > 0){
             echo '<pre>';
-            foreach ($datas as $data){
+            foreach ($datas as $key => $data){
                 if(is_array($data)){
                     echo print_r($data);
                 }
                 else {
-                    var_dump($data);
+                    var_dump($key, $data);
                 }
             }
             echo '</pre>';
