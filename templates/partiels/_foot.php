@@ -11,8 +11,8 @@
     new WOW().init();
 </script>
 
-<?php if (isset($javascript)) {
-    echo $javascript;
+<?php if (method_exists($this, 'js')) {
+    echo $this->js();
 } ?>
 
 <?php if($this->entity()->app_info('google_UA') != ''): ?>

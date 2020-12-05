@@ -607,7 +607,7 @@ class Upload
 
                 if (in_array($extension_upload, $this->upload_extension($autorist_file_type))) {
 
-                    if (($width > $resize_w_size) && ($height > $resize_h_size)) {
+                    if (!isset($resize_w_size, $resize_h_size) || (($width > $resize_w_size) && ($height > $resize_h_size))) {
 
                         //Creation du dossier de l'image a partir de l'id de l'annonce
                         if ($directory) {

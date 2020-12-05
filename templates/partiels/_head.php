@@ -66,8 +66,8 @@ setlocale(LC_ALL, 'fra');
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <?php if (isset($styleCSS)) {
-        echo $styleCSS;
+    <?php if (method_exists($this, 'css')) {
+        echo $this->css();
     } ?>
 
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,400i,700,700i|Poppins:400,400i,700,700i|Quintessential|Roboto:400,400i,700,700i" rel="stylesheet">

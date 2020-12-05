@@ -5,7 +5,7 @@ namespace App\Controller;
 use Core\Controller\Controller;
 use App\App;
 use \Core\Auth\DBAuth;
-use Core\Entity\Entity;
+use Globals\GlobalEntity;
 
 class AppController extends Controller {
 
@@ -30,7 +30,7 @@ class AppController extends Controller {
     }
 
     public function entity() {
-        $entity = new Entity();
+        $entity = new GlobalEntity();
         return $entity;
     }
 
