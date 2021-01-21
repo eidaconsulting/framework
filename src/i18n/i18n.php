@@ -68,7 +68,15 @@ class i18n
             $value = $this->settings[$key];
         }
 
-        if (isset($data) && $data != null) {
+        if (isset($data) && is_array($data)) {
+            $nb_occurence = substr_count($value, '%s');
+            $search = [];
+            for ($i = 0;$i < $nb_occurence; $i++){
+                $search[$i] = '%s';
+            }
+            $value = str_replace($search, $data, $value);
+        }
+        elseif (isset($data) && $data != null) {
             $value = str_replace('%s', $data, $value);
         }
         else {
