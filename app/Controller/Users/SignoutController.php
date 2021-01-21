@@ -13,12 +13,12 @@ class SignoutController extends AppController {
         $this->loadModel('Profil');
     }
 
-    private function css(){
+    protected function css(){
         $css = '';
         return $css;
     }
 
-    private function js(){
+    protected function js(){
         $js = '';
         return $js;
     }

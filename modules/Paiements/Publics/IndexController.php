@@ -19,12 +19,12 @@ class IndexController extends AppController
         /*$this->loadModel('Blogcategorie');*/
     }
 
-    private function css() {
+    protected function css() {
         $css = '<link href="'.$this->entity()->css_file("comment.css").'" rel="stylesheet">';
         return $css;
     }
 
-    private function js() {
+    protected function js() {
         $js = '<script src="'.$this->entity()->js_file("comment.js").'"></script>';
         return $js;
     }

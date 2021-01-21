@@ -4,6 +4,7 @@
 namespace Core\i18n;
 
 
+use App\App;
 use Core\Config;
 use Core\Entity\Entity;
 
@@ -65,10 +66,13 @@ class i18n
             $value = $datas[$key];
         } else {
             $value = $this->settings[$key];
+        }
 
-            if (isset($data) && $data != null) {
-                $value = str_replace('%s', $data, $value);
-            }
+        if (isset($data) && $data != null) {
+            $value = str_replace('%s', $data, $value);
+        }
+        else {
+            $value = str_replace('%s', '', $value);
         }
 
         return $value;
@@ -90,7 +94,7 @@ class i18n
         } elseif (isset($_SESSION["lang"]) && !empty($_SESSION["lang"])) {
             $this->setting($_SESSION['lang']);
         } else {
-            $this->session = 'fr';
+            $this->session = App::getInstance()->app_info('app_default_lang');
         }
     }
 
@@ -104,6 +108,7 @@ class i18n
     }
 
     /**
+     * To get the information from database in term of the selected language
      * @param object $param
      * @param string $champ
      * @return mixed
@@ -151,6 +156,14 @@ class i18n
             return $field.'_'.$this->session;
         }
         return $field;
+    }
+
+    /**
+     * To put the current language
+     * @return mixed
+     */
+    public function getCurrentLanguage (){
+        return $this->session;
     }
 
 }

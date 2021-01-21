@@ -12,12 +12,12 @@ class LoginController extends \App\Controller\AppController {
         $this->loadModel('Admin');
     }
 
-    private function css(){
+    protected function css(){
         $css = '<link href="'.$this->entity()->css_file("style-admin.css").'" rel="stylesheet">';
         return $css;
     }
 
-    private function js(){
+    protected function js(){
         $js = '';
         return $js;
     }

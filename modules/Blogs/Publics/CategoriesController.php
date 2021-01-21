@@ -17,12 +17,12 @@ class CategoriesController extends AppController
         $this->loadModel('Comment');
     }
 
-    private function css() {
+    protected function css() {
         $css = '';
         return $css;
     }
 
-    private function js() {
+    protected function js() {
         $js = '';
         return $js;
     }

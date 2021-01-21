@@ -5,9 +5,10 @@ namespace App\Controller;
 use Core\Controller\Controller;
 use App\App;
 use \Core\Auth\DBAuth;
+use Globals\GlobalController;
 use Globals\GlobalEntity;
 
-class AppController extends Controller {
+class AppController extends GlobalController {
 
     protected $template = 'default';
 

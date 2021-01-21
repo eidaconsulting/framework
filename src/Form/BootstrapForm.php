@@ -81,4 +81,25 @@ class BootstrapForm extends Form
         return '<div class="form-group">' . $html . '</div>';
     }
 
+    /**
+     * Generate checkbox from table
+     * @param string $name : Checkbox name
+     * @param array  $options : Table
+     */
+    public function generateCheckbox(string $name,array $options){
+        if(count($options) > 0){
+            $nbre = 0;
+            foreach ($options as $data){
+                $nbre++;
+                echo $this->input($name.'[]', $data['label'], null, [
+                    "required" => "required",
+                    "id" => $name.$nbre,
+                    "type" => 'checkbox',
+                    "value" => $data['value'],
+                    'class' => ''
+                ]);
+            }
+        }
+    }
+
 }

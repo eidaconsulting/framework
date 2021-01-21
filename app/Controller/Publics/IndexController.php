@@ -11,13 +11,13 @@ class IndexController extends \App\Controller\AppController {
         //$this->loadModel('Product');
     }
 
-    private function css(){
+    protected function css(){
         $css = '';
 
         return $css;
     }
 
-    private function js(){
+    protected function js(){
         $js = '';
 
         return $js;

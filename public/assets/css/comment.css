@@ -1,3 +1,24 @@
-#comment-form, #comment-forget {
+.comment-response-area, #commment-response-forget {
     display: none;
+}
+.comments-tabs {
+    background-color: rgba(0,0,0,.03);
+    border-radius: 5px;
+    margin-bottom: 2rem;
+}
+
+.comments-tabs .comments-head {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    padding: .5rem 1rem;
+    margin-bottom: .5rem;
+}
+
+.comments-tabs .comments-content {
+    padding: .5rem 1rem;
+}
+.comments-child {
+    padding: 0 0 0 2rem;
+}
+.comments-child > div {
+    margin-bottom: .5rem;
 }

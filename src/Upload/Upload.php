@@ -582,22 +582,22 @@ class Upload
         $watermark_position = isset($options['watermark_position']) ? $options['watermark_position'] : null;
         $watermark_txt = isset($options['watermark_txt']) ? $options['watermark_txt'] : Config::getInstance()->get('app_name');
 
-        //Recuperation des dimension de l'image actuelle
-        if ($resize) {
-            list($width, $height) = getimagesize($_FILES[$file]["tmp_name"]);
-            if ($resize_w_size == null && $resize_h_size == null) {
-                $resize_w_size = $width / 2;
-                $resize_h_size = $height / 2;
-            } elseif ($resize_h_size == null) {
-                $resize_h_size = $height / 2;
-            } elseif ($resize_w_size == null) {
-                $resize_w_size = $width / 2;
-            }
-
-        }
 
         if ($_FILES[$file]['error'] != UPLOAD_ERR_NO_FILE) {
 
+            //Recuperation des dimension de l'image actuelle
+            if ($resize) {
+                list($width, $height) = getimagesize($_FILES[$file]["tmp_name"]);
+                if ($resize_w_size == null && $resize_h_size == null) {
+                    $resize_w_size = $width / 2;
+                    $resize_h_size = $height / 2;
+                } elseif ($resize_h_size == null) {
+                    $resize_h_size = $height / 2;
+                } elseif ($resize_w_size == null) {
+                    $resize_w_size = $width / 2;
+                }
+
+            }
             $this->upload_max_size = Config::getInstance()->get('upload_max_size');
 
             if ($_FILES[$file]['size'] <= $this->upload_max_size) {
