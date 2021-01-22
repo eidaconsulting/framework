@@ -30,12 +30,11 @@ class App
     public function getTable ($name)
     {
         if (isset($_GET['url']) && $_GET['url'] != '') {
-            $explode = explode('/', $_GET['url']);
+            $explode = explode('/', trim($_GET['url'], '/'));
 
             $modules = $explode[0];
 
             $this->modules = ['Blogs', 'Paiements'];
-
 
             if (in_array(ucfirst($modules), $this->modules)) {
                 $class_name = '\\Modules\\' . ucfirst($modules) . '\\Table\\' . ucfirst($name) . 'Table';
