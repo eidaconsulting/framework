@@ -14,8 +14,6 @@ if(!isset($_GET['url'])) {
     $_GET['url'] = null;
 }
 
-var_dump($_GET['url']);
-
 $router = new \Core\Router\Router($_GET['url']);
 $router->get('/', 'Publics#index');
 $router->get('/404', 'Publics#notfound');

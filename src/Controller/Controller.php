@@ -21,6 +21,13 @@ class Controller {
      */
     protected $template;
 
+    protected function header(){
+        $header = '<meta http-equiv="Cache-control" content="no-cache, no-store, max-age=0, must-revalidate">';
+        $header .= '<meta http-equiv="X-Frame-Options" content="deny">';
+
+        return $header;
+    }
+
     /**
      * @param $view
      * @param array $variables
@@ -39,56 +46,57 @@ class Controller {
 
 
         if($view === 'publics.index'){
-            require(ROOT . '/templates/' . $this->template . '-index.php');
+            require(ROOT . '/layouts/' . $this->template . '-index.php');
         }
         else {
 
             if($base === 'admins'){
                 echo '<meta http-equiv="Cache-control" content="no-cache, no-store, max-age=0, must-revalidate">';
+                echo '<meta http-equiv="X-Frame-Options" content="deny">';
                 if($page !== 'login'){
                     $this->Auth()->isNotLogin('a');
                     App::getInstance()->getTable('Admin')->userInfo($_SESSION['authA']);
-                    require(ROOT . '/templates/' . $this->template . '-admin.php');
+                    require(ROOT . '/layouts/' . $this->template . '-admin.php');
                 }
                 elseif($page === 'login') {
                     $this->Auth()->isLogin('a');
-                    require(ROOT . '/templates/' . $this->template . '-login.php');
+                    require(ROOT . '/layouts/' . $this->template . '-login.php');
                 }
                 else{
                     $this->Auth()->isLogin('a');
-                    require(ROOT . '/templates/' . $this->template . '.php');
+                    require(ROOT . '/layouts/' . $this->template . '.php');
                 }
             }
             elseif($base === 'users'){ //Si c'est un espace utilisateur
-                echo '<meta http-equiv="Cache-control" content="no-cache, no-store, max-age=0, must-revalidate">';
+                $this->header();
                 if($page === 'login') { //Si l'utilisateur accede a la page login
                     $this->Auth()->isLogin('u');
-                    require(ROOT . '/templates/' . $this->template . '-login.php');
+                    require(ROOT . '/layouts/' . $this->template . '-login.php');
                 }
                 elseif($page === 'signup') {
                     $this->Auth()->isLogin('u');
-                    require(ROOT . '/templates/' . $this->template . '-login.php');
+                    require(ROOT . '/layouts/' . $this->template . '-login.php');
                 }
                 elseif($page === 'forgetpw') {
                     $this->Auth()->isLogin('u');
-                    require(ROOT . '/templates/' . $this->template . '-login.php');
+                    require(ROOT . '/layouts/' . $this->template . '-login.php');
                 }
                 elseif($page === 'forgetactivate') {
                     $this->Auth()->isLogin('u');
-                    require(ROOT . '/templates/' . $this->template . '-login.php');
+                    require(ROOT . '/layouts/' . $this->template . '-login.php');
                 }
                 elseif($page !== 'login'){ //Si la personne accede a une autre page user a par la page login
                     $this->Auth()->isNotLogin('u');
                     //App::getInstance()->getTable('User')->userInfo($_SESSION['authU'], 'profils');
-                    require(ROOT . '/templates/' . $this->template . '-users.php');
+                    require(ROOT . '/layouts/' . $this->template . '-users.php');
                 }
                 else{
                     $this->Auth()->isLogin('u');
-                    require(ROOT . '/templates/' . $this->template . '.php');
+                    require(ROOT . '/layouts/' . $this->template . '.php');
                 }
             }
             else {
-                require(ROOT . '/templates/' . $this->template . '.php');
+                require(ROOT . '/layouts/' . $this->template . '.php');
             }
 
         }

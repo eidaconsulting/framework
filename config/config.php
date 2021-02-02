@@ -4,12 +4,12 @@ return [
 
     "db_host" => "localhost",
     "db_user" => "root",
-    "db_pass" => "",
-    "db_name" => "myframework",
+    "db_pass" => "807aFv54x**",
+    "db_name" => "framework",
     "db_prefix" => "my_",
 
-    "app_url" => 'http://myframework.test',
-    "app_domaine" => 'myframework.test',
+    "app_url" => 'http://framework.test',
+    "app_domaine" => 'framework.test',
     "app_name" => 'EIDA CONSULTING',
     "app_email" => 'contact@eidaconsulting.com',
     "app_slogan" => 'Nous faisons du Web un allié pour votre succès',
@@ -58,11 +58,10 @@ return [
 
     /* CACHE */
     "cache_duration" => 0,
-    "cache_duration_format" => 's', //s = Seconde, m = Minute, h = Heure
+    "cache_duration_format" => 'm', //s = Seconde, m = Minute, h = Heure
 
     /* FEDAPAY CODE */
     "fp_private_key" => "sk_sandbox_xeb7zZBJ89NspyfiOrgwLPPO",
     "fp_type" => "sandbox",
-
 
 ];

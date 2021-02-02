@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Blogs\Publics;
+namespace Modules\Blogs\Admins;
 
 
 use App\App;

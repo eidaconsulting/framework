@@ -21,8 +21,7 @@ $entity->notification();
 <?php include 'partiels/_footer.php'; ?>
 <?php include 'partiels/_foot.php'; ?>
 
-<?php $content = ob_get_clean(); ?>
-<?php //$content = ob_end_flush(); ?>
+<?php $content = ob_end_flush(); ?>
 
 <?php
 $cache = new Core\Caches\Cache();

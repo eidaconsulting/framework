@@ -5,7 +5,7 @@
             data-public-key="pk_sandbox_6ADFfLt84MtjJXrF3rmQIVCr"
             data-button-text="Payer 35000"
             data-transaction-amount="35000"
-            data-transaction-description="Transaction Test MyFramework"
+            data-transaction-description="Transaction Test framework"
             data-currency-iso="XOF"
             data-widget-description="Votre boutique 100% africaine"
             data-widget-image="https://sandbox-checkout.fedapay.com/img/marketplace.svg"

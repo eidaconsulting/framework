@@ -48,7 +48,7 @@ function uploadImageContent(image, editor) {
     var data = new FormData();
     data.append("image", image);
     $.ajax({
-        url: "http://myframework.test/assets/ajax/summernotes.php",
+        url: "http://framework.test/assets/ajax/summernotes.php",
     cache: false,
         contentType: false,
         processData: false,

@@ -35,6 +35,10 @@ class i18n
      * @var
      */
     private $url;
+    /**
+     * @var string[]
+     */
+    private $authorized_language = ['fr', 'en'];
 
     /**
      * i18n constructor.
@@ -95,15 +99,32 @@ class i18n
      */
     private function start ()
     {
+        if(isset($_GET['lang']) && $_GET['lang'] != ''){
 
-        if (isset($_GET['lang']) && !empty($_GET['lang'])) {
-            $_SESSION["lang"] = $_GET['lang'];
-            $this->setting($_GET['lang']);
-        } elseif (isset($_SESSION["lang"]) && !empty($_SESSION["lang"])) {
-            $this->setting($_SESSION['lang']);
-        } else {
+            $lang = htmlspecialchars(trim($_GET['lang']));
+
+            if(in_array($lang, $this->authorized_language)){
+                $_SESSION["lang"] = $lang;
+                $this->setting($lang);
+            }
+            else {
+                $this->session = App::getInstance()->app_info('app_default_lang');
+            }
+        }
+        elseif(isset($_SESSION["lang"]) && !empty($_SESSION["lang"])){
+
+            if(in_array($_SESSION["lang"], $this->authorized_language)){
+                $this->setting($_SESSION['lang']);
+            }
+            else {
+                $this->session = App::getInstance()->app_info('app_default_lang');
+            }
+
+        }
+        else {
             $this->session = App::getInstance()->app_info('app_default_lang');
         }
+
     }
 
     /**

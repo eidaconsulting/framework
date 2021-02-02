@@ -14,7 +14,7 @@ class Cache
     /**
      * @var string
      */
-    private $cacheDir = '../cacheFile';
+    private $cacheDir = '../caches';
 
     /**
      * @var string
@@ -24,7 +24,7 @@ class Cache
     /**
      * @var
      */
-    private $cacheExp;
+    private $expirationTime;
 
     /**
      * @var
@@ -32,14 +32,48 @@ class Cache
     private $cacheDuration;
 
     /**
+     * @var
+     */
+    private $lifeDuration;
+
+    /**
+     * @var
+     */
+    private $timeUnity;
+
+    /**
      * Cache constructor.
      */
     public function __construct ()
     {
-        if (!is_dir($this->cacheDir)) {
-            mkdir($this->cacheDir . '/', 0777, true);
+        $entity = new Entity();
+        $this->lifeDuration = $entity->app_info('cache_duration');
+        $this->timeUnity = $entity->app_info('cache_duration_format');
+    }
+
+
+    /**
+     * Get the cache duration from config.php
+     *
+     * @return float|int|mixed|null
+     */
+    private function getCacheLife ()
+    {
+
+        if ($this->timeUnity == 'm') {
+            $times = $this->cacheDuration = $this->lifeDuration * 60;
+        } elseif ($this->timeUnity == 'h') {
+            $times = $this->cacheDuration = $this->lifeDuration * 3600;
+        } else {
+            $times = $this->cacheDuration = $this->lifeDuration;
         }
-        return $this->cacheDir;
+
+        if($times > 0){
+            return time() - $times;
+        }
+
+        return 0;
+
     }
 
     /**
@@ -50,13 +84,15 @@ class Cache
      */
     public function readFile ($file)
     {
+        $this->expirationTime = $this->getCacheLife();
 
-        $this->cacheExp = $this->getCacheLife();
+        var_dump(file_exists($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt), filemtime($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt), $this->expirationTime);
 
         if (file_exists($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt)
-            && filemtime($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt) > $this->cacheExp) {
+            && filemtime($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt) > $this->expirationTime) {
             return readfile($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt);
         }
+        return null;
 
     }
 
@@ -69,6 +105,16 @@ class Cache
      */
     public function createFile ($content, $file)
     {
+        $this->expirationTime = $this->getCacheLife();
+
+        if (!is_dir($this->cacheDir)) {
+            mkdir($this->cacheDir . '/', 0777, true);
+        }
+
+        if(file_exists($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt)
+           && filemtime($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt) > $this->expirationTime){
+            return null;
+        }
         return file_put_contents($this->cacheDir . '/' . $this->md5Encode($file) . $this->cacheExt, $content);
     }
 
@@ -104,35 +150,20 @@ class Cache
      */
     public function getCache ($content)
     {
-        $view = $_SERVER['REQUEST_URI'];
-        if (!$this->readFile($view)) {
-            $this->createFile($content, $view);
+        if($this->getCacheLife() > 0){
+            $view = $_SERVER['REQUEST_URI'];
+            if (!$this->readFile($view)) {
+                $this->createFile($content, $view);
+                return $content;
+            }
+        }
+        else {
+            $this->deleteAllFile();
             return $content;
         }
-    }
-
-    /**
-     * Get the cache duration from config.php
-     *
-     * @return float|int|mixed|null
-     */
-    private function getCacheLife ()
-    {
-        $entity = new Entity();
-        $duration = $entity->app_info('cache_duration');
-        $type = $entity->app_info('cache_duration_format');
-
-        if ($type == 'm') {
-            $times = $this->cacheDuration = $duration * 60;
-        } elseif ($type == 'h') {
-            $times = $this->cacheDuration = $duration * 3600;
-        } else {
-            $times = $this->cacheDuration = $duration;
-        }
-
-        return time() - $times;
 
     }
+
 
     /**
      * Generate the cache name

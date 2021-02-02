@@ -5,7 +5,8 @@ setlocale(LC_ALL, 'fr_FR');
 setlocale(LC_ALL, 'fra');
 ?>
 <!DOCTYPE html>
-<html lang="<?php if (isset($_SESSION['lang']) && $_SESSION['lang'] != "") { echo $_SESSION['lang'];} else { echo $this->entity()->app_info('app_default_lang') ; } ?>" xml:lang="<?php if (isset($_SESSION['lang']) && $_SESSION['lang'] != "") { echo $_SESSION['lang'];} else { echo $this->entity()->app_info('app_default_lang') ; } ?>">
+<?php if (isset($_SESSION['lang']) && $_SESSION['lang'] != "") { $language = $_SESSION['lang']; } else { $language =  $this->entity()->app_info('app_default_lang') ; } ?>
+<html lang="<?= $language ?>" xml:lang="<?= $language ?>">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -48,9 +49,7 @@ setlocale(LC_ALL, 'fra');
     <meta property="og:description"    content="<?php if (isset($description) && $description != "") { echo $description;} else { echo $this->entity()->app_info('app_description') ; } ?>" />
     <meta property="og:image"          content="<?php if (isset($og_picture) && $og_picture != "") { echo $og_picture;} else { echo $this->entity()->img_file('logo.png'); } ?>" />
 
-    <title>
-        <?php if (isset($page_titre) && $page_titre != "") { echo $page_titre;} else { echo $this->entity()->app_info('app_slogan') ; } ?> - <?= $this->entity()->app_info('app_name'); ?>
-    </title>
+    <title><?php if (isset($page_titre) && $page_titre != "") { echo $page_titre;} else { echo $this->entity()->app_info('app_slogan') ; } ?> :: <?= $this->entity()->app_info('app_name'); ?></title>
 
     <!-- Favicons -->
     <link href="<?= $this->entity()->img_file('favicon.144x144.png'); ?>" rel="apple-touch-icon" type="image/png" sizes="144x144">
@@ -68,6 +67,10 @@ setlocale(LC_ALL, 'fra');
 
     <?php if (method_exists($this, 'css')) {
         echo $this->css();
+    } ?>
+
+    <?php if (method_exists($this, 'header')) {
+        echo $this->header();
     } ?>
 
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,400i,700,700i|Poppins:400,400i,700,700i|Quintessential|Roboto:400,400i,700,700i" rel="stylesheet">

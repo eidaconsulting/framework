@@ -7,7 +7,7 @@ if ((ini_get('zlib.output_compression') != true) &&
     ob_start();
 }
 ?>
-<?php $lang = new \Core\i18n\i18n();  ?>
+<?php $lang = new \Core\i18n\i18n(); ?>
 <?php include 'partiels/_head.php'; ?>
 <?php include 'partiels/_header.php'; ?>
 <?php include 'partiels/_nav.php'; ?>
@@ -21,7 +21,6 @@ $entity->notification();
 <?php include 'partiels/_footer.php'; ?>
 <?php include 'partiels/_foot.php'; ?>
 
-<?php //$content = ob_get_clean(); ?>
 <?php $content = ob_end_flush(); ?>
 
 <?php

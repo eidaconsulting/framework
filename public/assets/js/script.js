@@ -57,7 +57,7 @@ $(function () {
     $ ('#cookiesbtn').click (function (e) {
         e.preventDefault()
         var cookies = $ (".cookies");
-        var url = 'http://myframework.test/assets/ajax/cookies.php'
+        var url = 'http://framework.test/assets/ajax/cookies.php'
         $.ajax ({
             url: url,
             success: function () {

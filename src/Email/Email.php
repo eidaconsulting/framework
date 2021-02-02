@@ -26,9 +26,9 @@ class Email
     public function template ($template = null)
     {
         if (is_null($template)) {
-            require(ROOT . '/templates/email/email/email_default');
+            require(ROOT . '/layouts/email/email/email_default');
         }
-        require(ROOT . '/templates/email/email/email_' . $template);
+        require(ROOT . '/layouts/email/email/email_' . $template);
     }
 
     /**
