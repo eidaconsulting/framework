@@ -29,43 +29,36 @@ class Form
      */
     public function FormInput ($name, $label, $placeholder = null, $options = [])
     {
-        $type = isset($options['type']) ? $options['type'] : 'text';
-        $class = isset($options['class']) ? $options['class'] : '';
-        $id = isset($options['id']) ? $options['id'] : $name;
-        $require = isset($options['required']) ? $options['required'] : null;
-        $maxlength = isset($options['maxlength']) ? 'maxlength="' . $options['maxlength'] . '"' : null;
-        $data_target = isset($options['data-target']) ? 'data-target="' . $options['data-target'] . '"' : null;
-        $data_toggle = isset($options['data-toggle']) ? 'data-toggle="' . $options['data-toggle'] . '"' : null;
-        $data_mask = isset($options['data-mask']) ? $options['data-mask'] : null;
-        $accept = isset($options['accept']) ? $options['accept'] : null;
-        $indication = isset($options['indication']) ? $options['indication'] : null;
-        $checked = isset($options['checked']) ? 'checked = checked' : null;
-        $autocomplete = isset($options['autocomplete']) ? 'autocomplete="on"' : 'autocomplete="off"';
-        if ($type !== 'submit') {
-            $value = isset($options['value']) ? $options['value'] : $this->getValue($name);
+        $params = [];
+
+        if(!array_key_exists('type', $options)){ $options['type'] = 'text'; }
+        if(!array_key_exists('id', $options)){ $options['id'] = $name; }
+        if(!array_key_exists('autocomplete', $options)){ $options['autocomplete'] = 'off'; }
+        if ($options['type'] == 'textaera' && !array_key_exists('row', $options)){
+            $options['row'] = 7;
         }
 
-        if (!is_null($data_mask)) {
-            $data_mask = 'data-mask = "' . $data_mask . '"';
+        if ($options['type'] !== 'submit' && !array_key_exists('value', $options)) {
+            $options['value'] = $this->getValue($name);
         }
-        if (!is_null($maxlength) && $maxlength >= 500) {
-            $row = 10;
-        } else {
-            $row = 7;
+
+        if(count($options) > 0){
+            foreach ($options as $k => $v) {
+                $params [] = $k .' = "' . $v . '"';
+            }
         }
+
+        $param = implode(' ', $params);
 
         if ($label != '') {
-            if ($type !== 'checkbox') {
-                if ($type !== 'radio') {
-                    if ($require) {
-                        $label = '<label for="' . $id . '">' . $label . ' <span class="indication">*</span></label>';
-                    } else {
-                        $label = '<label for="' . $id . '">' . $label . ' </label>';
-                    }
-                }
+            if (array_key_exists('required', $options)) {
+                $label = '<label for="' . $options['id'] . '">' . $label . ' <span class="indication">*</span></label>';
+            } else {
+                $label = '<label for="' . $options['id'] . '">' . $label . ' </label>';
             }
-        } else {
-            if ($require) {
+        }
+        else {
+            if (array_key_exists('required', $options)) {
                 if ($placeholder) {
                     $placeholder = $placeholder . ' *';
                 }
@@ -73,47 +66,42 @@ class Form
         }
 
 
-        if ($type === 'textarea') {
-            $class_explode = explode(' ', $class);
-            if (in_array('summernote', $class_explode)) {
-                $input = '<textarea id="' . $id . '" ' . $require . ' name="' . $name . '" class="' . $class . '" rows="' . $row . '" 
-            placeholder="' . $placeholder . '" ' . $maxlength . '>' . $value . '</textarea>';
-                if (isset($indication)) {
-                    $input .= '<span class="is-indication">' . $indication . '</span>';
+        if ($options['type'] === 'textarea') {
+
+            //Si je précise des class
+            if(array_key_exists('class', $options) && $options['class'] != ''){
+                $class_explode = explode(' ', $class);
+
+                if (in_array('summernote', $class_explode)) {
+                    $value = $options['value'];
+                } else {
+                    $value = strip_tags($options['value']);
                 }
-            } else {
-                $input = '<textarea id="' . $id . '" ' . $require . ' name="' . $name . '" class="' . $class . '" rows="' . $row . '" 
-            placeholder="' . $placeholder . '" ' . $maxlength . '>' . strip_tags($value) . '</textarea>';
-                if (isset($indication)) {
-                    $input .= '<span class="is-indication">' . $indication . '</span>';
-                }
+
+                $input = '<textarea name="' . $name . '"  placeholder="' . $placeholder . '" ' . $param . '>' . $value . '</textarea>';
             }
-        } elseif ($type === 'radio') {
-            $input = '<input id="' . $id . '" name="' . $name . '" type="' . $type . '" value="' . $value . '" class="' . $class . '" ' . $checked . '> 
-            <span for="' . $id . '" class="is-indication">' . $label . '</span>';
-        } elseif ($type === 'checkbox') {
-            $input = '<input id="' . $id . '" name="' . $name . '" type="' . $type . '" value="' . $value . '" class="' . $class . '" ' . $checked . '> 
-            <span for="' . $id . '" class="is-indication">' . $label . '</span>';
-        } elseif ($type === 'submit') {
-            $input = '<input id="' . $id . '" name="' . $name . '" type="' . $type . '" value="' . $placeholder . '" class="' . $class . '" 
-            ' . $data_toggle . ' ' . $data_target . '>';
-        } elseif (!is_null($accept) && $type === 'file') {
-            $input = '<input id="' . $id . '" name="' . $name . '" type="' . $type . '" value="' . $placeholder . '" class="' . $class . '" 
-            ' . $data_toggle . ' ' . $data_target . ' accept="' . $accept . '">';
-            if (isset($indication)) {
-                $input .= '<span class="is-indication">' . $indication . '</span>';
-            }
-        } else {
-            $input = '<input id="' . $id . '" type="' . $type . '" name="' . $name . '" value="' . $value . '" 
-            class="' . $class . '" placeholder="' . $placeholder . '" ' . $maxlength . ' ' . $data_mask . '  ' . $require . ' ' . $autocomplete . ' />';
-            if (isset($indication)) {
-                $input .= '<span class="is-indication">' . $indication . '</span>';
+            else {
+                $input = '<textarea name="' . $name . '"  placeholder="' . $placeholder . '" ' . $param . '>' . $options['value'] . '</textarea>';
             }
         }
+        elseif ($options['type'] === 'radio' || $options['type'] === 'checkbox') {
 
-        if ($type === 'radio') {
-            return $input;
-        } elseif ($type === 'checkbox') {
+            $input = '<input name="' . $name . '" '.$param.'> 
+            <span for="' . $options['id'] . '" class="is-indication">' . $label . '</span>';
+
+        }
+        elseif ($options['type'] === 'submit') {
+            $input = '<input name="' . $name . '" value="' . $placeholder . '" '.$param.'>';
+        }
+        else {
+            $input = '<input name="' . $name . '" placeholder="' . $placeholder . '" '.$param.' />';
+        }
+        //ajoute de la partie indication
+        if (array_key_exists('indication', $options)) {
+            $input .= '<span class="is-indication">' . $options['indication'] . '</span>';
+        }
+
+        if ($options['type'] === 'radio' || $options['type'] === 'checkbox') {
             return $input;
         } else {
             return $label . $input;

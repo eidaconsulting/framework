@@ -67,6 +67,9 @@ class ForgetactivateController extends AppController {
                         $redirect = $this->entity()->users('login');
                         $this->redirection($redirect);
                     }
+                    else {
+                        $this->alertDefine($erreurs, 'danger');
+                    }
 
                 }
 
