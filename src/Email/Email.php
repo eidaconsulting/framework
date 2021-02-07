@@ -157,7 +157,7 @@ class Email
     {
 
         if (is_null($to) || $to == '') {
-            $to = Config::getInstance()->get('app_email');
+            $to = Config::getInstance()->get('company_email');
         }
 
         //Objet
@@ -170,7 +170,7 @@ class Email
         }
 
         if (is_null($senderEmail) || $senderEmail == '') {
-            $senderEmail = Config::getInstance()->get('app_email');
+            $senderEmail = Config::getInstance()->get('company_email');
         }
 
         $r = $this->line_beak($to);

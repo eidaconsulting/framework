@@ -6,3 +6,4 @@ Modification.txt
 /layouts/email
 /public/uploads
 /modules/Paiements
+/config/config.php

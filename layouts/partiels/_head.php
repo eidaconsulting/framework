@@ -12,7 +12,6 @@ setlocale(LC_ALL, 'fra');
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="Description" content="<?php if (isset($description) && $description != "") { echo $description;} else { echo $this->entity()->app_info('app_description') ; } ?>">
-    <meta name="Keywords" content="<?= $this->entity()->app_info('app_keyword'); ?>">
     <meta name="Indentifier-URL" content="<?= $this->entity()->url(); ?>">
     <meta name="Copyright" content="&copy; <?= date('Y'); ?> <?= strtoupper($this->entity()->app_info('app_name')); ?>">
     <meta name="Robots" content="All">

@@ -73,7 +73,7 @@
                         <i class="far fa-envelope mt-2"></i>
                     </div>
                     <div class="col-md-10 is-indication">
-                        <?= $this->entity()->app_info('app_email'); ?>
+                        <?= $this->entity()->app_info('company_email'); ?>
                         <?= $this->entity()->app_info('app_url'); ?>
                     </div>
                 </div>
