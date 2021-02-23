@@ -24,7 +24,9 @@ class captcha
         $this->instance = new Config();
         $this->site_key = $this->instance->get('captcha_site_key');
         $this->secret_key = $this->instance->get('captcha_secret_key');
-        $this->reponse = $_POST['g-recaptcha-response'];
+        if(isset($_POST['g-recaptcha-response'])){
+            $this->reponse = $_POST['g-recaptcha-response'];
+        }
         $this->remoteip = $_SERVER['REMOTE_ADDR'];
     }
 

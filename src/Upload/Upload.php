@@ -583,7 +583,7 @@ class Upload
         $watermark_txt = isset($options['watermark_txt']) ? $options['watermark_txt'] : Config::getInstance()->get('app_name');
 
 
-        if ($_FILES[$file]['error'] != UPLOAD_ERR_NO_FILE) {
+        if (isset($_FILES[$file]) && $_FILES[$file]['error'] != UPLOAD_ERR_NO_FILE) {
 
             //Recuperation des dimension de l'image actuelle
             if ($resize) {

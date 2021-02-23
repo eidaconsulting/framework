@@ -34,7 +34,7 @@ class Form
         if(!array_key_exists('type', $options)){ $options['type'] = 'text'; }
         if(!array_key_exists('id', $options)){ $options['id'] = $name; }
         if(!array_key_exists('autocomplete', $options)){ $options['autocomplete'] = 'off'; }
-        if ($options['type'] == 'textaera' && !array_key_exists('row', $options)){
+        if ($options['type'] == 'textarea' && !array_key_exists('row', $options)){
             $options['row'] = 7;
         }
 
