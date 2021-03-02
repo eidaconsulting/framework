@@ -74,7 +74,8 @@ class DBAuth
         foreach ($userInfos as $k => $v) {
             $_SESSION[$type][$k] = $v;
         }
-        $_SESSION[$type.'_token'] = bin2hex(random_bytes(15));
+        unset($_SESSION[$type]['password']);
+        $_SESSION[$type.'_token'] = bin2hex(random_bytes(25));
     }
 
     /**

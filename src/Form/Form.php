@@ -2,6 +2,8 @@
 
 namespace Core\Form;
 
+use core\Auth\Token;
+
 class Form
 {
     public $surround = 'div';
@@ -69,7 +71,7 @@ class Form
         if ($options['type'] === 'textarea') {
 
             //Si je précise des class
-            if(array_key_exists('class', $options) && $options['class'] != ''){
+            if(array_key_exists('class', $options) && $options['class'] != 'form-control'){
                 $class_explode = explode(' ', $class);
 
                 if (in_array('summernote', $class_explode)) {
@@ -206,5 +208,10 @@ class Form
     private function surround ($html)
     {
         return "<{$this->surround}>{$html}</{$this->surround}>";
+    }
+
+    public function csrf($type){
+        $csrf = new DBAuth();
+        return $csrf->csrf();
     }
 }

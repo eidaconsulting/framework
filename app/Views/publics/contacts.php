@@ -37,6 +37,7 @@
                     <h5>Nous écrire</h5>
                     <hr>
                     <form class="" method="post">
+                        <?= $form->csrf('u') ?>
                         <?= $form->input('name', '', 'Nom et prénom(s)', [
                             'required' => 'required'
                         ]) ?>
@@ -53,6 +54,7 @@
                         <?= $form->input('message', '', 'Message', [
                             'required' => 'required',
                             'type' => 'textarea',
+                            'rows' => 10,
                         ]) ?>
 
                         <?= $this->entity()->captcha(); ?>
@@ -77,28 +79,28 @@
                     <h3 style="color: #2A502C;">Suivez nous également sur les réseaux sociaux.</h3><br>
 
                     <div class="contact-social-area d-flex justify-content-between align-items-center">
-                        <?php if($this->entity()->social_url('facebook') != ''): ?>
-                            <a href="<?= $this->entity()->social_url('facebook'); ?>" target="_blank" >
+                        <?php if($this->entity()->social_url('facebook_url') != ''): ?>
+                            <a href="<?= $this->entity()->social_url('facebook_url'); ?>" target="_blank" >
                                 <i class="fab fa-facebook d-flex justify-content-center align-items-center fa-2x"></i>
                             </a>
                         <?php endif; ?>
-                        <?php if($this->entity()->social_url('youtube') != ''): ?>
-                            <a href="<?= $this->entity()->social_url('youtube'); ?>" target="_blank">
+                        <?php if($this->entity()->social_url('youtube_url') != ''): ?>
+                            <a href="<?= $this->entity()->social_url('youtube_url'); ?>" target="_blank">
                                 <i class="fab fa-youtube d-flex justify-content-center align-items-center fa-2x"></i>
                             </a>
                         <?php endif; ?>
-                        <?php if($this->entity()->social_url('twitter') != ''): ?>
-                            <a href="<?= $this->entity()->social_url('twitter'); ?>" target="_blank">
+                        <?php if($this->entity()->social_url('twitter_url') != ''): ?>
+                            <a href="<?= $this->entity()->social_url('twitter_url'); ?>" target="_blank">
                                 <i class="fab fa-twitter d-flex justify-content-center align-items-center fa-2x"></i>
                             </a>
                         <?php endif; ?>
-                        <?php if($this->entity()->social_url('flickr') != ''): ?>
-                            <a href="<?= $this->entity()->social_url('flickr'); ?>" target="_blank">
+                        <?php if($this->entity()->social_url('flickr_url') != ''): ?>
+                            <a href="<?= $this->entity()->social_url('flickr_url'); ?>" target="_blank">
                                 <i class="fab fa-flickr fa-2x"></i>
                             </a>
                         <?php endif; ?>
-                        <?php if($this->entity()->social_url('instagram') != ''): ?>
-                            <a href="<?= $this->entity()->social_url('instagram'); ?>" target="_blank">
+                        <?php if($this->entity()->social_url('instagram_url') != ''): ?>
+                            <a href="<?= $this->entity()->social_url('instagram_url'); ?>" target="_blank">
                                 <i class="fab fa-instagram fa-2x"></i>
                             </a>
                         <?php endif; ?>&nbsp;
