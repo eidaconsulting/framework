@@ -3,12 +3,13 @@
 namespace App\Controller\Publics;
 
 use Core\Form\BootstrapForm;
+use function Couchbase\defaultDecoder;
 
 class IndexController extends \App\Controller\AppController {
 
     public function __construct() {
         parent::__construct();
-        //$this->loadModel('Product');
+        $this->loadModel('Admin');
     }
 
     protected function css(){

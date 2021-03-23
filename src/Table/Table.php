@@ -65,23 +65,39 @@ class Table
      * @return mixed : Retourne un tableau comportant tous les ligne selectionnées. Pour un affichage par
      *                        defaut il ne faut pas mettre des informations dans la parenthèse.
      */
-    public function MyAll ($options = [], $orderBy = 'add_date DESC')
+    public function MyAll ($options = [], $egalites = [], $orderBy = 'add_date DESC')
     {
         $sql_parts = [];
         $attribute = [];
-        if (count($options) > 0) {
-            foreach ($options as $k => $v) {
-                $sql_parts[] = "$k = ?";
-                $attribute[] = $v;
+
+        if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
+            if(count($options) > count($egalites)){
+
+                for($i=count($egalites);count($egalites) <= count($options); $i++){
+                    $egalites[] = '=';
+                }
             }
-            $sql_part = implode(' AND ', $sql_parts);
-
-            return $this->MyQuery("SELECT * FROM {$this->table} WHERE $sql_part ORDER BY $orderBy", $attribute);
-
-        } else {
-            return $this->MyQuery("SELECT * FROM {$this->table} ORDER BY $orderBy");
+            elseif(count($options) < count($egalites)){
+                return "Il y a plus d'égalités que de condition.";
+            }
         }
 
+        if (count($options) > 0) {
+            $position = 0;
+
+            foreach ($options as $k => $v) {
+                $sql_parts[] = "$k $egalites[$position] ?";
+                $attribute[] = $v;
+                $position++;
+            }
+
+            $sql_part = implode(' AND ', $sql_parts);
+            return $this->MyQuery("SELECT * FROM {$this->table} WHERE $sql_part ORDER BY $orderBy", $attribute);
+
+        }
+        else {
+            return $this->MyQuery("SELECT * FROM {$this->table} ORDER BY $orderBy");
+        }
     }
 
     /**
@@ -102,7 +118,7 @@ class Table
      * @param null  $champ
      * @return mixed : Fait le mise a jours d'un champs
      */
-    public function MyUpdate ($id, $options = [], $champ = null)
+    public function MyUpdate ($id, $options = [],  $champ = null)
     {
         $sql_parts = [];
         $attribute = [];
@@ -127,7 +143,7 @@ class Table
      * @param $options
      * @return mixed : Creer un nouveau champs dans la base de données
      */
-    public function MyCreate ($options)
+    public function MyCreate (array $options)
     {
         $sql_parts = [];
         $attribute = [];
@@ -217,6 +233,7 @@ class Table
     {
         $sql_parts = [];
         $attribute = [];
+
         if (count($options) > 0) {
             foreach ($options as $k => $v) {
                 $sql_parts[] = "$k LIKE ?";
@@ -225,7 +242,8 @@ class Table
             $sql_part = implode(' OR ', $sql_parts);
 
             return $this->MyQuery("SELECT * FROM {$this->table} WHERE $sql_part ORDER BY $orderBy", $attribute);
-        } else {
+        }
+        else {
             return [];
         }
     }
@@ -242,15 +260,30 @@ class Table
      * @return mixed : Retourne un tableau comportant tous les ligne selectionnées. Pour un affichage par
      *                        defaut il ne faut pas mettre des informations dans la parenthèse.
      */
-    public function MyLim ($start, $end, $options = [], $orderBy = 'add_date DESC')
+    public function MyLim ($start, $end, $options = [], $egalites = [], $orderBy = 'add_date DESC')
     {
         $sql_parts = [];
         $attribute = [];
         $lim = $start . ', ' . $end;
+
+        if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
+            if(count($options) > count($egalites)){
+                for($i=count($egalites);count($egalites) <= count($options); $i++){
+                    $egalites[] = '=';
+                }
+            }
+            elseif(count($options) < count($egalites)){
+                return "Il y a plus d'égalités que de condition.";
+            }
+        }
+
         if (count($options) > 0) {
+            $position = 0;
+
             foreach ($options as $k => $v) {
-                $sql_parts[] = "$k = ?";
+                $sql_parts[] = "$k $egalites[$position] ?";
                 $attribute[] = $v;
+                $position++;
             }
             $sql_part = implode(' AND ', $sql_parts);
 
@@ -268,16 +301,31 @@ class Table
      *                       parametres de selection sont fournis et un tableau vide si rien n'est
      *                       fournie.
      */
-    public function MyWhere ($options = [])
+    public function MyWhere ($options = [], $egalites = [])
     {
         $sql_parts = [];
         $attribute = [];
 
-        if (count($options) > 0) {
-            foreach ($options as $k => $v) {
-                $sql_parts[] = "$k = ?";
-                $attribute[] = $v;
+        if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
+            if(count($options) > count($egalites)){
+                for($i=count($egalites);count($egalites) <= count($options); $i++){
+                    $egalites[] = '=';
+                }
             }
+            elseif(count($options) < count($egalites)){
+                return "Il y a plus d'égalités que de condition.";
+            }
+        }
+
+        if (count($options) > 0) {
+            $position = 0;
+
+            foreach ($options as $k => $v) {
+                $sql_parts[] = "$k $egalites[$position] ?";
+                $attribute[] = $v;
+                $position++;
+            }
+
             $sql_part = implode(' AND ', $sql_parts);
             return $this->MyQuery("SELECT * FROM {$this->table} WHERE $sql_part", $attribute, true);
         } else {
@@ -330,7 +378,7 @@ class Table
      *                       Ex: id => 2 ou username = admins
      * @return mixed
      */
-    public function MyCount ($field = null, $options = [])
+    public function MyCount ($field = null, $options = [], $egalites = [])
     {
 
         if (is_null($field)) {
@@ -339,12 +387,28 @@ class Table
 
         $sql_parts = [];
         $attribute = [];
+
+        if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
+            if(count($options) > count($egalites)){
+                for($i=count($egalites);count($egalites) <= count($options); $i++){
+                    $egalites[] = '=';
+                }
+            }
+            elseif(count($options) < count($egalites)){
+                return "Il y a plus d'égalités que de condition.";
+            }
+        }
+
         if (count($options) > 0) {
 
+            $position = 0;
+
             foreach ($options as $k => $v) {
-                $sql_parts[] = "$k = ?";
+                $sql_parts[] = "$k $egalites[$position] ?";
                 $attribute[] = $v;
+                $position++;
             }
+
             $sql_part = implode(' AND ', $sql_parts);
 
             $count = $this->MyQuery("SELECT COUNT($field) as nbre FROM {$this->table} WHERE $sql_part", $attribute);
@@ -362,17 +426,32 @@ class Table
      * @param array $options
      * @return mixed
      */
-    public function MyCountDistinct ($champ, $options = [])
+    public function MyCountDistinct ($champ, $options = [], $egalites = [])
     {
         $sql_parts = [];
         $attribute = [];
 
+        if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
+            if(count($options) > count($egalites)){
+                for($i=count($egalites);count($egalites) <= count($options); $i++){
+                    $egalites[] = '=';
+                }
+            }
+            elseif(count($options) < count($egalites)){
+                return "Il y a plus d'égalités que de condition.";
+            }
+        }
+
         if (count($options) > 0) {
 
+            $position = 0;
+
             foreach ($options as $k => $v) {
-                $sql_parts[] = "$k = ?";
+                $sql_parts[] = "$k $egalites[$position] ?";
                 $attribute[] = $v;
+                $position++;
             }
+
             $sql_part = implode(' AND ', $sql_parts);
 
             return $this->MyQuery("SELECT COUNT (DISTINCT $champ) FROM {$this->table} WHERE $sql_part", $attribute);
@@ -419,13 +498,13 @@ class Table
      * @param array $options
      * @return array
      */
-    public function MyExtract ($key, $value, $options = [], $value2 = null, $find = null)
+    public function MyExtract ($key, $value, $options = [], $egalites = [], $value2 = null, $find = null)
     {
 
         $name = isset($options['name']) ? $options['name'] : false;
         $table = isset($options['table']) ? $options['table'] : false;
 
-        $records = $this->MyAll($options, "$value ASC");
+        $records = $this->MyAll($options, $egalites, "$value ASC");
         $return = [];
         if ($value2) {
             foreach ($records as $v) {
@@ -460,18 +539,33 @@ class Table
      * @param array $options
      * @return mixed
      */
-    public function MyJoin (string $table, string $champ1, string $champ2, $one = false, $options = [])
+    public function MyJoin (string $table, string $champ1, string $champ2, $one = false, $options = [], $egalites = [])
     {
         $table = Config::getInstance()->get('db_prefix') . strtolower($table) . 's';
 
         $sql_parts = [];
         $attribute = [];
 
+        if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
+            if(count($options) > count($egalites)){
+
+                for($i=count($egalites);count($egalites) <= count($options); $i++){
+                    $egalites[] = '=';
+                }
+            }
+            elseif(count($options) < count($egalites)){
+                return "Il y a plus d'égalités que de condition.";
+            }
+        }
+
         if (count($options) > 0) {
 
+            $position = 0;
+
             foreach ($options as $k => $v) {
-                $sql_parts[] = "$k = ?";
+                $sql_parts[] = "$k $egalites[$position] ?";
                 $attribute[] = $v;
+                $position++;
             }
 
             $sql_part = implode(' AND ', $sql_parts);
@@ -495,17 +589,34 @@ class Table
      *                       Ex: id => 2 ou username = admins
      * @return mixed : Retourne la sommes
      */
-    public function MySum ($sum, $options = [])
+    public function MySum ($sum, $options = [], $egalites = [])
     {
 
         $sql_parts = [];
         $attribute = [];
+
+        if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
+            if(count($options) > count($egalites)){
+
+                for($i=count($egalites);count($egalites) <= count($options); $i++){
+                    $egalites[] = '=';
+                }
+            }
+            elseif(count($options) < count($egalites)){
+                return "Il y a plus d'égalités que de condition.";
+            }
+        }
+
         if (count($options) > 0) {
 
+            $position = 0;
+
             foreach ($options as $k => $v) {
-                $sql_parts[] = "$k = ?";
+                $sql_parts[] = "$k $egalites[$position] ?";
                 $attribute[] = $v;
+                $position++;
             }
+
             $sql_part = implode(' AND ', $sql_parts);
 
             $count = $this->MyQuery("SELECT SUM($sum) as nbre FROM {$this->table} WHERE $sql_part", $attribute);
@@ -514,36 +625,6 @@ class Table
             $count = $this->MyQuery("SELECT SUM($sum) as nbre FROM {$this->table}");
         }
         return $count['0']->nbre;
-    }
-
-
-    /**
-     * @param        $options
-     * @param        $id
-     * @param bool   $lim
-     * @param string $orderBy
-     * @return mixed
-     */
-    public function MyOthers ($options, $id, $lim = false, $orderBy = 'add_date DESC')
-    {
-
-        $sql_parts[] = "id != ?";
-        $attribute[] = $id;
-        if ($lim) $lim = "LIMIT $lim";
-
-        if (count($options) > 0) {
-
-            foreach ($options as $k => $v) {
-                $sql_parts[] = "$k = ?";
-                $attribute[] = $v;
-            }
-            $sql_part = implode(' AND ', $sql_parts);
-
-            $datas = $this->MyQuery("SELECT * FROM {$this->table} WHERE $sql_part ORDER BY $orderBy $lim", $attribute);
-        } else {
-            $datas = $this->MyQuery("SELECT * FROM {$this->table} WHERE $sql_part ORDER BY $orderBy $lim", $attribute);
-        }
-        return $datas;
     }
 
 }

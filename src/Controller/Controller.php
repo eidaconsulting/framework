@@ -232,17 +232,10 @@ class Controller {
      *                     quand il s'agit de plusieurs valeurs, il faut les séparer d'une
      *                     virgule [$valeur1, $valeur2, ...]
      */
-    static function dd($datas){
+    static function debug($datas){
         if(is_array($datas) && count($datas) > 0){
             echo '<pre>';
-            foreach ($datas as $key => $data){
-                if(is_array($data)){
-                    echo print_r($data);
-                }
-                else {
-                    var_dump($key, $data);
-                }
-            }
+            print_r($datas);
             echo '</pre>';
         }
         else {

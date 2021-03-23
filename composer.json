@@ -8,7 +8,9 @@
             "email": "contact@eidaconsulting.com"
         }
     ],
-    "require-dev": {},
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
     "require": {
         "fedapay/fedapay-php": "^0.2.1"
     },

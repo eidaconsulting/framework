@@ -29,20 +29,23 @@
                     sur Internet, et l'automatisation de votre système de gestion et de vos services.
                 </p>
                 <div class="social-area">
-                    <?php if($this->entity()->social_url('facebook') != ''): ?>
-                        <a href="<?= $this->entity()->social_url('facebook'); ?>" target="_blank"><i class="fab fa-facebook-f"></i> </a>&nbsp;&nbsp;
+                    <?php if($this->entity()->social_url('youtube_url') != ''): ?>
+                        <a href="<?= $this->entity()->social_url('youtube_url'); ?>" target="_blank"><i class="fab fa-youtube"></i> </a>&nbsp;&nbsp;
                     <?php endif; ?>
-                    <?php if($this->entity()->social_url('twitter') != ''): ?>
-                        <a href="<?= $this->entity()->social_url('twitter'); ?>" target="_blank"><i class="fab fa-twitter"></i></a>&nbsp;
+                    <?php if($this->entity()->social_url('facebook_url') != ''): ?>
+                        <a href="<?= $this->entity()->social_url('facebook_url'); ?>" target="_blank"><i class="fab fa-facebook-f"></i> </a>&nbsp;&nbsp;
                     <?php endif; ?>
-                    <?php if($this->entity()->social_url('youtube') != ''): ?>
-                        <a href="<?= $this->entity()->social_url('youtube'); ?>" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <?php if($this->entity()->social_url('twitter_url') != ''): ?>
+                        <a href="<?= $this->entity()->social_url('twitter_url'); ?>" target="_blank"><i class="fab fa-twitter"></i></a>&nbsp;
                     <?php endif; ?>
-                    <?php if($this->entity()->social_url('flickr') != ''): ?>
-                        <a href="<?= $this->entity()->social_url('flickr'); ?>" target="_blank"><i class="fab fa-flickr"></i></a>
+                    <?php if($this->entity()->social_url('instagram_url') != ''): ?>
+                        <a href="<?= $this->entity()->social_url('instagram_url'); ?>" target="_blank"><i class="fab fa-instagram"></i></a>
                     <?php endif; ?>&nbsp;
-                    <?php if($this->entity()->social_url('instagram') != ''): ?>
-                        <a href="<?= $this->entity()->social_url('instagram'); ?>" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <?php if($this->entity()->social_url('flickr_url') != ''): ?>
+                        <a href="<?= $this->entity()->social_url('flickr_url'); ?>" target="_blank"><i class="fab fa-flickr"></i></a>
+                    <?php endif; ?>&nbsp;
+                    <?php if($this->entity()->social_url('telegram_url') != ''): ?>
+                        <a href="<?= $this->entity()->social_url('telegram_url'); ?>" target="_blank"><i class="fab fa-telegram"></i></a>
                     <?php endif; ?>&nbsp;
                 </div>
             </div>

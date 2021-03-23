@@ -51,47 +51,26 @@ class i18n
     }
 
     /**
-     * @return mixed
+     * @param $data
      */
-    public function getUrl ()
+    private function setting ($data)
     {
-        $first = explode('?', $this->url);
-        return $first[0];
+        $this->session = $data;
+        $this->url = $_SERVER['REQUEST_URI'] . '?lang=' . $data;
     }
 
     /**
-     * @param $key
-     * @return mixed|null
+     * @param string $key
+     * @return mixed
      */
-    public function get ($key, $data = null)
-    {
+    private function getContent(string $key){
         if (!isset($this->settings[$key])) {
-            $datas = require($this->folder . 'fr.php');
-            $value = $datas[$key];
+            $files = require($this->folder . Config::getInstance()->get('app_default_lang').'.php');
+            $content = $files[$key];
         } else {
-            $value = $this->settings[$key];
+            $content = $this->settings[$key];
         }
-
-        if (isset($data) && is_array($data)) {
-            $nb_occurence = substr_count($value, '%s');
-            $search = [];
-            for ($i = 0;$i < $nb_occurence; $i++){
-                $search[$i] = '%s';
-            }
-            $value = str_replace($search, $data, $value);
-        }
-        elseif (isset($data) && $data != null) {
-            $value = str_replace('%s', $data, $value);
-        }
-        else {
-            $value = str_replace('%s', '', $value);
-        }
-
-        return $value;
-    }
-
-    private function getDefaultLanguage(){
-        return Config::getInstance()->get('app_default_lang');
+        return $content;
     }
 
     /***
@@ -108,7 +87,7 @@ class i18n
                 $this->setting($lang);
             }
             else {
-                $this->session = App::getInstance()->app_info('app_default_lang');
+                $this->session = Config::getInstance()->get('app_default_lang');
             }
         }
         elseif(isset($_SESSION["lang"]) && !empty($_SESSION["lang"])){
@@ -117,23 +96,35 @@ class i18n
                 $this->setting($_SESSION['lang']);
             }
             else {
-                $this->session = App::getInstance()->app_info('app_default_lang');
+                $this->session = Config::getInstance()->get('app_default_lang');
             }
-
         }
         else {
-            $this->session = App::getInstance()->app_info('app_default_lang');
+            $this->session = Config::getInstance()->get('app_default_lang');
         }
-
     }
 
     /**
-     * @param $data
+     * @return mixed
      */
-    private function setting ($data)
+    public function getUrl ()
     {
-        $this->session = $data;
-        $this->url = $_SERVER['REQUEST_URI'] . '?lang=' . $data;
+        $first = explode('?', $this->url);
+        return $first[0];
+    }
+
+    /**
+     * @param $key
+     * @return mixed|null
+     */
+    public function get ($key, $data = null)
+    {
+        if (isset($data) && $data != null) {
+            return str_replace('%s', $data, $this->getContent($key));
+        }
+        else {
+            return str_replace('%s', '', $this->getContent($key));
+        }
     }
 
     /**
@@ -193,6 +184,25 @@ class i18n
      */
     public function getCurrentLanguage (){
         return $this->session;
+    }
+
+    /**
+     * @param string $key
+     * @param array  $variables
+     * @return string|string[]|null
+     */
+    public function getWithVariable (string $key, $variables = [])
+    {
+        if (isset($variables) && is_array($variables)) {
+
+            $search = array_keys($variables);
+            $replace = array_values($variables);
+            $value = str_replace($search, $replace, $this->getContent($key));
+
+            return $value;
+
+        }
+        return $this->getContent($key);
     }
 
 }
