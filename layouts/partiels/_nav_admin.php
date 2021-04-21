@@ -1,16 +1,39 @@
-<nav class="navbar navbar-expand-lg bg-white fixed-top flex-md-nowrap">
-    <div class="col-md-3 text-center">
-        <a class="navbar-brand text-dark text-center" href="<?= $this->entity()->app_info('app_url'); ?>">
-            <img src="<?= $this->entity()->img_file('favicon.png'); ?>" width="30" height="30" class="d-inline-block align-top" alt="<?= $this->entity()->app_info('app_name'); ?>">
-            &nbsp;&nbsp;<strong><?= strtoupper($this->entity()->app_info('app_name')); ?></strong>
-        </a>
+<div class="a-header">
+    <div class="a-toggle">
+        <label for="a-toggle" class="a-toggle-icon"><i class='bx bx-menu'></i></label>
+        <span class="a-toggle-title">Dashbord</span>
     </div>
-    <div class="col-md-7">
-        <div class="pl-3"><?= $page_titre; ?></div>
-    </div>
-    <div class="col-md-2 text-right">
-        <a href="<?= $this->entity()->admins('index'); ?>"class="btn btn-sm btn-perso-primary">Menu</a>
-        <a href="<?= $this->entity()->admins('signout'); ?>"class="btn btn-sm btn-outline-danger">Déconnexion</a>
-    </div>
-</nav>
+    <form>
+        <div class="a-form">
+            <i class='bx bx-search'></i>
+            <input type="text">
+        </div>
+    </form>
+    <div class="a-userspace">
+        <div class="a-icon-space">
+            <div class="a-icon">
+                <a href="">
+                    <i class='bx bx-envelope'></i>
+                    <span class="a-icon-badge">12</span>
+                </a>
+            </div>
+            <div class="a-icon">
+                <a href="">
+                    <i class='bx bx-comment-detail'></i>
+                    <span class="a-icon-badge">05</span>
+                </a>
 
+            </div>
+        </div>
+        <div class="a-identity">
+            <div class="a-avatar">
+                <img src="<?= $this->entity()->img_file('admin-avatar.jpg') ?>" class="a-img-avatar">
+            </div>
+            <div class="a-username">
+                <div class="a-big"><strong>Dossou Jean</strong></div>
+                <div class="a-small">Admin</div>
+            </div>
+        </div>
+
+    </div>
+</div>

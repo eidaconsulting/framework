@@ -1,0 +1,79 @@
+/*  "*"     : Permet de selectionner tous les élements */
+* { padding: 0 }
+
+
+/*  ","     : Permet d'appliquer une propriété CSS a plusieurs elements  */
+p, tr { }   /* Permet d'appliquer la meme propriété pour p et tr
+
+
+/*  X + Y    : permet de ne sélectionner que l'élément qui est immédiatement
+                précédé par le premier élément ciblé */
+ul + p {
+    color: red;
+}
+
+/*   X > Y  : ne sélectionnera que des enfants directs. Par exemple,
+                soit le balisage suivant : */
+
+/*
+ <div id="container">
+   <ul>
+      <li> List Item
+        <ul>
+           <li> Child </li>
+        </ul>
+      </li>
+      <li> List Item </li>
+      <li> List Item </li>
+      <li> List Item </li>
+   </ul>
+</div>
+
+Le sélecteur #container > ul ne ciblera que les uls qui sont enfants
+directs de la div avec l'id container. A l'inverse, il ne ciblera pas,
+par exemple, le ul qui est enfant du premier li
+ */
+
+/*  X ~ Y   : sélectionne n'importe quel élément X, du moment qu'ils suivent un Y */
+ul ~ p {
+    color: red;
+}
+
+/* X[title] : Permet de cibler les selecteurs X qui ont l'attribut title */
+a[title] {
+    color: green;
+}
+
+/* X[href="foo"]    : Permet de selectionner le selecteur X dont l'attribut href est
+                        egal à foo */
+a[href="http://net.tutsplus.com"] {
+    color: #1f6053; /* vert nettuts */
+}
+
+/*  X[href*="nettuts"]  : Permet de selectionner le selecteur X dont l'attribut href contient
+                            quelques part la valeur nettuts */
+a[href*="tuts"] {
+    color: #1f6053; /* vert nettuts */
+}
+
+/*  X[href^="http"]  : Permet de selectionner le selecteur X dont l'attribut href commence par http */
+a[href^="http"] {
+    background: url(path/to/external/icon.png) no-repeat;
+    padding-left: 10px;
+}
+
+/*  X[href$=".jpg"]  : Permet de selectionner le selecteur X dont l'attribut href se termine par .jpg */
+a[href$=".jpg"] {
+    color: red;
+}
+a[href$=".jpg"],
+a[href$=".jpeg"],
+a[href$=".png"],
+a[href$=".gif"] {
+    color: red;
+}
+
+/*  X[data-*="foo"]  : Permet de selectionner le selecteur X dont l'attribut href se termine par .jpg */
+a[data-filetype="image"] {
+    color: red;
+}

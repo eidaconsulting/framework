@@ -93,7 +93,7 @@
             <div class="col-md-3"></div>
         </div>
     </div>
-    <div class="row no-gutters copyright">
+    <div class="copyright">
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-md-8 small">

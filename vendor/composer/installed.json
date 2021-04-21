@@ -74,17 +74,17 @@
         },
         {
             "name": "fedapay/fedapay-php",
-            "version": "0.2.1",
-            "version_normalized": "0.2.1.0",
+            "version": "0.2.4",
+            "version_normalized": "0.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fedapay/fedapay-php.git",
-                "reference": "ce7b66d151cb4883f8fe04994a47d2bc49af4f84"
+                "reference": "494a154c17f70552075e17f040311c2da7972ab7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fedapay/fedapay-php/zipball/ce7b66d151cb4883f8fe04994a47d2bc49af4f84",
-                "reference": "ce7b66d151cb4883f8fe04994a47d2bc49af4f84",
+                "url": "https://api.github.com/repos/fedapay/fedapay-php/zipball/494a154c17f70552075e17f040311c2da7972ab7",
+                "reference": "494a154c17f70552075e17f040311c2da7972ab7",
                 "shasum": ""
             },
             "require": {
@@ -98,7 +98,7 @@
                 "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "~2.0"
             },
-            "time": "2019-07-29T10:50:40+00:00",
+            "time": "2019-11-15T17:06:52+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -123,6 +123,10 @@
                 "fedapay",
                 "payment processing"
             ],
+            "support": {
+                "issues": "https://github.com/fedapay/fedapay-php/issues",
+                "source": "https://github.com/fedapay/fedapay-php/tree/0.2.4"
+            },
             "install-path": "../fedapay/fedapay-php"
         },
         {
@@ -531,17 +535,17 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.12.2",
-            "version_normalized": "1.12.2.0",
+            "version": "1.13.0",
+            "version_normalized": "1.13.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "245710e971a030f42e08f4912863805570f23d39"
+                "reference": "be1996ed8adc35c3fd795488a653f4b518be70ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/245710e971a030f42e08f4912863805570f23d39",
-                "reference": "245710e971a030f42e08f4912863805570f23d39",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/be1996ed8adc35c3fd795488a653f4b518be70ea",
+                "reference": "be1996ed8adc35c3fd795488a653f4b518be70ea",
                 "shasum": ""
             },
             "require": {
@@ -555,7 +559,7 @@
                 "phpspec/phpspec": "^6.0",
                 "phpunit/phpunit": "^8.0 || ^9.0"
             },
-            "time": "2020-12-19T10:15:11+00:00",
+            "time": "2021-03-17T13:42:18+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -595,23 +599,23 @@
             ],
             "support": {
                 "issues": "https://github.com/phpspec/prophecy/issues",
-                "source": "https://github.com/phpspec/prophecy/tree/1.12.2"
+                "source": "https://github.com/phpspec/prophecy/tree/1.13.0"
             },
             "install-path": "../phpspec/prophecy"
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.5",
-            "version_normalized": "9.2.5.0",
+            "version": "9.2.6",
+            "version_normalized": "9.2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "f3e026641cc91909d421802dd3ac7827ebfd97e1"
+                "reference": "f6293e1b30a2354e8428e004689671b83871edde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f3e026641cc91909d421802dd3ac7827ebfd97e1",
-                "reference": "f3e026641cc91909d421802dd3ac7827ebfd97e1",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f6293e1b30a2354e8428e004689671b83871edde",
+                "reference": "f6293e1b30a2354e8428e004689671b83871edde",
                 "shasum": ""
             },
             "require": {
@@ -636,7 +640,7 @@
                 "ext-pcov": "*",
                 "ext-xdebug": "*"
             },
-            "time": "2020-11-28T06:44:49+00:00",
+            "time": "2021-03-28T07:26:59+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -669,7 +673,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.5"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.6"
             },
             "funding": [
                 {
@@ -934,17 +938,17 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.2",
-            "version_normalized": "9.5.2.0",
+            "version": "9.5.4",
+            "version_normalized": "9.5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f661659747f2f87f9e72095bb207bceb0f151cb4"
+                "reference": "c73c6737305e779771147af66c96ca6a7ed8a741"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f661659747f2f87f9e72095bb207bceb0f151cb4",
-                "reference": "f661659747f2f87f9e72095bb207bceb0f151cb4",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c73c6737305e779771147af66c96ca6a7ed8a741",
+                "reference": "c73c6737305e779771147af66c96ca6a7ed8a741",
                 "shasum": ""
             },
             "require": {
@@ -985,7 +989,7 @@
                 "ext-soap": "*",
                 "ext-xdebug": "*"
             },
-            "time": "2021-02-02T14:45:58+00:00",
+            "time": "2021-03-23T07:16:29+00:00",
             "bin": [
                 "phpunit"
             ],
@@ -1024,7 +1028,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.4"
             },
             "funding": [
                 {

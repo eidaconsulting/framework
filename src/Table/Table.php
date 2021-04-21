@@ -72,13 +72,19 @@ class Table
 
         if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
             if(count($options) > count($egalites)){
-
                 for($i=count($egalites);count($egalites) <= count($options); $i++){
                     $egalites[] = '=';
                 }
             }
             elseif(count($options) < count($egalites)){
-                return "Il y a plus d'égalités que de condition.";
+                for($i=count($options);count($egalites) <= count($options); $i++){
+                    unset($egalites[$i]);
+                }
+            }
+        }
+        elseif (count($options) > 0 && count($egalites) == 0){
+            for($i=0;$i <= count($options); $i++){
+                $egalites[] = '=';
             }
         }
 
@@ -92,6 +98,7 @@ class Table
             }
 
             $sql_part = implode(' AND ', $sql_parts);
+
             return $this->MyQuery("SELECT * FROM {$this->table} WHERE $sql_part ORDER BY $orderBy", $attribute);
 
         }
@@ -273,7 +280,14 @@ class Table
                 }
             }
             elseif(count($options) < count($egalites)){
-                return "Il y a plus d'égalités que de condition.";
+                for($i=count($options);count($egalites) <= count($options); $i++){
+                    unset($egalites[$i]);
+                }
+            }
+        }
+        elseif (count($options) > 0 && count($egalites) == 0){
+            for($i=0;$i <= count($options); $i++){
+                $egalites[] = '=';
             }
         }
 
@@ -313,7 +327,14 @@ class Table
                 }
             }
             elseif(count($options) < count($egalites)){
-                return "Il y a plus d'égalités que de condition.";
+                for($i=count($options);count($egalites) <= count($options); $i++){
+                    unset($egalites[$i]);
+                }
+            }
+        }
+        elseif (count($options) > 0 && count($egalites) == 0){
+            for($i=0;$i <= count($options); $i++){
+                $egalites[] = '=';
             }
         }
 
@@ -395,7 +416,14 @@ class Table
                 }
             }
             elseif(count($options) < count($egalites)){
-                return "Il y a plus d'égalités que de condition.";
+                for($i=count($options);count($egalites) <= count($options); $i++){
+                    unset($egalites[$i]);
+                }
+            }
+        }
+        elseif (count($options) > 0 && count($egalites) == 0){
+            for($i=0;$i <= count($options); $i++){
+                $egalites[] = '=';
             }
         }
 
@@ -438,7 +466,14 @@ class Table
                 }
             }
             elseif(count($options) < count($egalites)){
-                return "Il y a plus d'égalités que de condition.";
+                for($i=count($options);count($egalites) <= count($options); $i++){
+                    unset($egalites[$i]);
+                }
+            }
+        }
+        elseif (count($options) > 0 && count($egalites) == 0){
+            for($i=0;$i <= count($options); $i++){
+                $egalites[] = '=';
             }
         }
 
@@ -548,13 +583,19 @@ class Table
 
         if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
             if(count($options) > count($egalites)){
-
                 for($i=count($egalites);count($egalites) <= count($options); $i++){
                     $egalites[] = '=';
                 }
             }
             elseif(count($options) < count($egalites)){
-                return "Il y a plus d'égalités que de condition.";
+                for($i=count($options);count($egalites) <= count($options); $i++){
+                    unset($egalites[$i]);
+                }
+            }
+        }
+        elseif (count($options) > 0 && count($egalites) == 0){
+            for($i=0;$i <= count($options); $i++){
+                $egalites[] = '=';
             }
         }
 
@@ -597,13 +638,19 @@ class Table
 
         if(count($options) > 0 && count($egalites) > 0 && count($options) != count($egalites)){
             if(count($options) > count($egalites)){
-
                 for($i=count($egalites);count($egalites) <= count($options); $i++){
                     $egalites[] = '=';
                 }
             }
             elseif(count($options) < count($egalites)){
-                return "Il y a plus d'égalités que de condition.";
+                for($i=count($options);count($egalites) <= count($options); $i++){
+                    unset($egalites[$i]);
+                }
+            }
+        }
+        elseif (count($options) > 0 && count($egalites) == 0){
+            for($i=0;$i <= count($options); $i++){
+                $egalites[] = '=';
             }
         }
 

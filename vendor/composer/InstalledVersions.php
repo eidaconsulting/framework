@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '5c2b1fcf1d0b88430d9ca620d8bc7fabf7d80ddf',
+    'reference' => '515ba91f7168771d463da6f738fc5d3c4410253e',
     'name' => 'eidaconsulting/framework',
   ),
   'versions' => 
@@ -51,16 +51,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '5c2b1fcf1d0b88430d9ca620d8bc7fabf7d80ddf',
+      'reference' => '515ba91f7168771d463da6f738fc5d3c4410253e',
     ),
     'fedapay/fedapay-php' => 
     array (
-      'pretty_version' => '0.2.1',
-      'version' => '0.2.1.0',
+      'pretty_version' => '0.2.4',
+      'version' => '0.2.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ce7b66d151cb4883f8fe04994a47d2bc49af4f84',
+      'reference' => '494a154c17f70552075e17f040311c2da7972ab7',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -131,21 +131,21 @@ private static $installed = array (
     ),
     'phpspec/prophecy' => 
     array (
-      'pretty_version' => '1.12.2',
-      'version' => '1.12.2.0',
+      'pretty_version' => '1.13.0',
+      'version' => '1.13.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '245710e971a030f42e08f4912863805570f23d39',
+      'reference' => 'be1996ed8adc35c3fd795488a653f4b518be70ea',
     ),
     'phpunit/php-code-coverage' => 
     array (
-      'pretty_version' => '9.2.5',
-      'version' => '9.2.5.0',
+      'pretty_version' => '9.2.6',
+      'version' => '9.2.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f3e026641cc91909d421802dd3ac7827ebfd97e1',
+      'reference' => 'f6293e1b30a2354e8428e004689671b83871edde',
     ),
     'phpunit/php-file-iterator' => 
     array (
@@ -185,12 +185,12 @@ private static $installed = array (
     ),
     'phpunit/phpunit' => 
     array (
-      'pretty_version' => '9.5.2',
-      'version' => '9.5.2.0',
+      'pretty_version' => '9.5.4',
+      'version' => '9.5.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f661659747f2f87f9e72095bb207bceb0f151cb4',
+      'reference' => 'c73c6737305e779771147af66c96ca6a7ed8a741',
     ),
     'sebastian/cli-parser' => 
     array (
