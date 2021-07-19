@@ -21,11 +21,15 @@ class Controller {
      */
     protected $template;
 
-    protected function header(){
-        $header = '<meta http-equiv="Cache-control" content="no-cache, no-store, max-age=0, must-revalidate">';
-        $header .= '<meta http-equiv="X-Frame-Options" content="deny">';
+    protected function header($show = false){
+        if($show){
+            $header = '<meta http-equiv="Cache-control" content="no-cache, no-store, max-age=0, must-revalidate">';
+            $header .= '<meta http-equiv="X-Frame-Options" content="deny">';
 
-        return $header;
+            return $header;
+        }
+        return null;
+
     }
 
     /**
@@ -51,8 +55,7 @@ class Controller {
         else {
 
             if($base === 'admins'){
-                echo '<meta http-equiv="Cache-control" content="no-cache, no-store, max-age=0, must-revalidate">';
-                echo '<meta http-equiv="X-Frame-Options" content="deny">';
+                $this->header(true);
                 if($page !== 'login'){
                     $this->Auth()->isNotLogin('a');
                     App::getInstance()->getTable('Admin')->userInfo($_SESSION['authA']);
@@ -68,7 +71,7 @@ class Controller {
                 }
             }
             elseif($base === 'users'){ //Si c'est un espace utilisateur
-                $this->header();
+                $this->header(true);
                 if($page === 'login') { //Si l'utilisateur accede a la page login
                     $this->Auth()->isLogin('u');
                     require(ROOT . '/layouts/' . $this->template . '-login.php');
@@ -96,6 +99,7 @@ class Controller {
                 }
             }
             else {
+                $this->header(false);
                 require(ROOT . '/layouts/' . $this->template . '.php');
             }
 

@@ -26,6 +26,11 @@ setlocale(LC_ALL, 'fra');
         <meta name="google-site-verification" content="<?= $this->entity()->app_info('google-code'); ?>" />
     <?php endif; ?>
 
+
+    <?php if (method_exists($this, 'header')) {
+        echo $this->header();
+    } ?>
+
     <!-- Google / Search Engine Tags-->
     <meta itemprop="name" content="<?= $this->entity()->app_info('app_name'); ?>">
     <meta itemprop="description" content="<?php if (isset($description) && $description != "") { echo $description;} else { echo $this->entity()->app_info('app_description') ; } ?>">
@@ -51,10 +56,6 @@ setlocale(LC_ALL, 'fra');
     <title><?php if (isset($page_titre) && $page_titre != "") { echo $page_titre;} else { echo $this->entity()->app_info('app_slogan') ; } ?> :: <?= $this->entity()->app_info('app_name'); ?></title>
 
     <!-- Favicons -->
-    <link href="<?= $this->entity()->img_file('favicon.144x144.png'); ?>" rel="apple-touch-icon" type="image/png" sizes="144x144">
-    <link href="<?= $this->entity()->img_file('favicon.114x114.png'); ?>" rel="apple-touch-icon" type="image/png" sizes="114x114">
-    <link href="<?= $this->entity()->img_file('favicon.72x72.png'); ?>" rel="apple-touch-icon" type="image/png" sizes="72x72">
-    <link href="<?= $this->entity()->img_file('favicon.57x57.png'); ?>" rel="apple-touch-icon" type="image/png">
     <link href="<?= $this->entity()->img_file('favicon.png'); ?>" rel="icon" type="image/png">
     <link href="<?= $this->entity()->img_file('favicon.ico'); ?>" rel="shortcut icon">
 
@@ -68,11 +69,8 @@ setlocale(LC_ALL, 'fra');
         echo $this->css();
     } ?>
 
-    <?php if (method_exists($this, 'header')) {
-        echo $this->header();
-    } ?>
-
-    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,400i,700,700i|Poppins:400,400i,700,700i|Quintessential|Roboto:400,400i,700,700i" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,400i,700,700i|Poppins:400,400i,700,700i|Quintessential|Roboto:400,400i,700,700i" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis:400,700|Open+Sans:400,400i,700,700i|Poppins:400,400i,700,700i|Quintessential|Roboto:400,400i,700,700i"> </noscript>
 
     <link rel="preload" href="<?= $this->entity()->vendor_file('font-awesome/all.min.css'); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript> <link rel="stylesheet" href="<?= $this->entity()->vendor_file('font-awesome/all.min.css'); ?>"> </noscript>

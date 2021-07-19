@@ -44,6 +44,7 @@
     padding: 20px 0px 20px 10px;
 }
 .a-sidebar-content a.nav-link {
+    display: block;
     color: #969aa0;
     margin-bottom: 10px;
     transition: all .5s;
@@ -109,6 +110,7 @@
     width: calc(100% - 250px);
     height: 70px;
     transition: all .5s;
+    z-index: 300;
 }
 .a-header .a-toggle  {
     display: flex;

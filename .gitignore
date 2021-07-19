@@ -1,7 +1,9 @@
-/aide-memoire
 /.idea
+/.github
 /caches
 /layouts/email
 /public/uploads
 /modules/Paiements
 /config/config.php
+/tests
+/vendor/*

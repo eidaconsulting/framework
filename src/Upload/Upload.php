@@ -665,13 +665,30 @@ class Upload
                                     if ($resize && ucfirst($resize_type) === 'Center') {
                                         //Recuperation des dimensions de l'image
                                         list($width, $height) = getimagesize($newFile);
-                                        $new_w_size = $resize_w_size + 100;
-                                        $new_h_size = $resize_h_size + 100;
-                                        $resize_w_size2 = ($width < $resize_w_size) ? $new_w_size : $resize_w_size;
-                                        $resize_h_size2 = ($height < $resize_h_size) ? $new_h_size : $resize_h_size;
-                                        $this->resizeRatio($new_w_size, $new_h_size, $resize_directory, '', $upload_directory, $newName);
-                                        $this->resizeCenter($resize_w_size2, $resize_h_size2, $resize_directory, '', $resize_directory, $newName);
-                                        $this->resizeRatio($resize_w_size, $resize_h_size, $resize_directory, '', $resize_directory, $newName);
+                                        if($width < $resize_w_size && $height >= $resize_h_size){
+                                            $this->resizeRatio($resize_w_size, '', $resize_directory, '', $upload_directory, $newName);
+                                        }
+                                        elseif($height < $resize_h_size && $width >= $resize_w_size){
+                                            $this->resizeRatio('', $resize_h_size, $resize_directory, '', $upload_directory, $newName);
+                                        }
+                                        elseif($height < $resize_h_size && $width < $resize_w_size){
+                                            if($height < $width){
+                                                $this->resizeRatio('', $resize_h_size, $resize_directory, '', $upload_directory, $newName);
+                                            }
+                                            else {
+                                                $this->resizeRatio($resize_w_size, '', $resize_directory, '', $upload_directory, $newName);
+                                            }
+                                        }
+                                        else {
+                                            if($height < $width){
+                                                $this->resizeRatio('', $resize_h_size, $resize_directory, '', $upload_directory, $newName);
+                                            }
+                                            else {
+                                                $this->resizeRatio($resize_w_size, '', $resize_directory, '', $upload_directory, $newName);
+                                            }
+                                        }
+                                        $this->resizeCenter($resize_w_size, $resize_h_size, $resize_directory, '', $resize_directory, $newName);
+                                        //$this->resizeRatio($resize_w_size, $resize_h_size, $resize_directory, '', $resize_directory, $newName);
                                         if ($watermark) {
                                             $this->picto($watermark_txt, $upload_directory, $newName, $upload_directory, $newName, $watermark_position, $watermark_img);
                                         }

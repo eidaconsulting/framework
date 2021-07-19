@@ -70,7 +70,7 @@
     </div>
 </section>
 
-<section class="is-bg-noree">
+<section>
     <div class="container">
         <div class="is-bg-white-without px-3 pt-3 pb-5 mt-4">
             <div class="row no-gutters">

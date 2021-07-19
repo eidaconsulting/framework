@@ -8,5 +8,5 @@ $entity->notification();
 
 <?= $content; ?>
 
-<?php include 'partiels/_footer.php'; ?>
+<?php //include 'partiels/_footer.php'; ?>
 <?php include 'partiels/_foot.php'; ?>

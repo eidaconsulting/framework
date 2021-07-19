@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '515ba91f7168771d463da6f738fc5d3c4410253e',
+    'reference' => '8662f180b2ecbe3eb26f47aa3e0e7804334349aa',
     'name' => 'eidaconsulting/framework',
   ),
   'versions' => 
@@ -27,7 +27,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '515ba91f7168771d463da6f738fc5d3c4410253e',
+      'reference' => '8662f180b2ecbe3eb26f47aa3e0e7804334349aa',
     ),
     'fedapay/fedapay-php' => 
     array (

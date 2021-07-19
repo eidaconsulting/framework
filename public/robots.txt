@@ -4,13 +4,15 @@
 User-agent: *
 Disallow: */app/controller/admins/
 Disallow: */app/controller/users/
-Disallow: */app/controller/AppController
+Disallow: */app/controller/AppController.php
 Disallow: */app/Entity/
 Disallow: */app/Table/
+Disallow: */app/App.php
 Disallow: */app/views/admins/
 Disallow: */app/views/users/
 Disallow: */config/
-Disallow: */core/
+Disallow: */global/
+Disallow: */src/
 Disallow: */modules/Blogs/Admins/
 Disallow: */modules/Blogs/Entity/
 Disallow: */modules/Blogs/Table/

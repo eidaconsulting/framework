@@ -2,6 +2,7 @@
 
 namespace App\Controller\Publics;
 
+use App\App;
 use Core\Form\BootstrapForm;
 use function Couchbase\defaultDecoder;
 
@@ -22,6 +23,13 @@ class IndexController extends \App\Controller\AppController {
         $js = '';
 
         return $js;
+    }
+
+    protected function description($description = null){
+        if(!is_null($description)){
+            return $description;
+        }
+        return App::getInstance()->app_info('app_description');
     }
 
     public function view(){

@@ -102,7 +102,7 @@ label {
     margin-left: .5rem;
 }
 
-.nav-link.actif{
+.nav-link.active {
     color: var(--light-text-color) !important;
     border-bottom: 2px solid var(--light-text-color) !important;
 }
@@ -369,7 +369,7 @@ label {
     top: 1rem;
     display: none;
     max-width: 45%;
-    z-index: 3000 !important;
+    z-index: 10000 !important;
 }
 @media screen and (max-width:780px) {
     .is-alerte-message {
@@ -379,7 +379,7 @@ label {
         top: 1rem;
         max-width: 95%;
         display: none;
-        z-index: 3000 !important;
+        z-index: 10000 !important;
         border-right: 0;
     }
 }

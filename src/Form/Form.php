@@ -72,7 +72,7 @@ class Form
 
             //Si je précise des class
             if(array_key_exists('class', $options) && $options['class'] != 'form-control'){
-                $class_explode = explode(' ', $class);
+                $class_explode = explode(' ', $options['class']);
 
                 if (in_array('summernote', $class_explode)) {
                     $value = $options['value'];

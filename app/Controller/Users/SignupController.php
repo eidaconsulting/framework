@@ -91,7 +91,7 @@ class SignupController extends AppController {
 
                    $emailClass = new Email();
 
-                   if($emailClass->sendEmail($content, $to, $objet, null, null)){
+                   if($emailClass->sendEmail($content, $objet, $to, null, null)){
 
                        //Construction email de l'administrateur
                        $content = '<h4>Bonjour Admin</h4>';
@@ -104,7 +104,7 @@ class SignupController extends AppController {
                        $content .= '<p><strong>Date d\'inscription : </strong>' . date('d/m/Y h:i:s') .'</p>';
                        $content .= '<p>-----------------------------------</p>';
 
-                       $emailClass->sendEmail($content, null, $new_objet, null, null);
+                       $emailClass->sendEmail($content, $new_objet, null, null, null);
 
                        $this->alertDefine('Création de boutique prise en compte. Veuillez consulter 
 <strong>' . $email . '</strong> afin de confirmer votre compte pour complèter votre profil', 'success') ;

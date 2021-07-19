@@ -46,7 +46,6 @@ class DBAuth
             if (password_verify($password, $user->password)) {
                 $_SESSION[$session] = $user->id;
                 $this->getConnectInfos($user->id, $type);
-
                 return true;
             }
         }
@@ -75,7 +74,9 @@ class DBAuth
             $_SESSION[$type][$k] = $v;
         }
         unset($_SESSION[$type]['password']);
-        $_SESSION[$type.'_token'] = bin2hex(random_bytes(25));
+        if(!isset($_SESSION[$type.'_token']) || $_SESSION[$type.'_token'] == ''){
+            $_SESSION[$type.'_token'] = bin2hex(random_bytes(25));
+        }
     }
 
     /**

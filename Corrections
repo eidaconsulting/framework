@@ -9,3 +9,14 @@
 ======================
 1. Delete core folder.
 2. Change nav_actif to is_current in the all fils
+
+27/05/2021
+================
+Optimisation de l'upload de fichier. Suppression de blanc autour de l'image lors du
+redimensionnement d'une image plus pétite que la taille de redimentionnement.
+-- Fichier Upload - Ligne 665
+
+
+12/06/2021
+===============
+Optimisation du chargement de la page. Ajout de la propriété  "async defer" a toutes le balises <script>

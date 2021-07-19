@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use Core\Controller\Controller;
 use App\App;
 use \Core\Auth\DBAuth;
 use Globals\GlobalController;
