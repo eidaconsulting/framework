@@ -83,37 +83,50 @@ class Entity
      */
     public function dateFormat (string $datetime, $type = null): string
     {
-        list($date, $time) = explode(" ", $datetime);
-        list($year, $month, $day) = explode("-", $date);
-        list($hour, $min, $sec) = explode(":", $time);
-        $months = array("Janv", "Fév", "Mars", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc");
+        if($datetime != ''){
 
-        if (isset($type)) {
-            //Format 12/12/12
-            if ($type === 'jj/mm/yy') {
-                $datetime = "$day/$month/$year";
-            } //Format 12/12/12 5:5
-            elseif ($type === 'jj/mm/yy h:m') {
-                $datetime = "$day/$month/$year ${hour}:${min}";
-            } //Format 12/12/12 5:5:5
-            elseif ($type === 'jj/mm/yy h:m:s') {
-                $datetime = "$day/$month/$year ${hour}:${min}:${sec}";
-            } //Format 12 Janv 2015 5h5m5s
-            elseif ($type === 'jj mmmm yyyy hhmmss') {
-                $datetime = "$day " . $months[$month - 1] . " $year ${hour}h${min}m${sec}s";
-            } //Format Janv 2015
-            elseif ($type === 'mmmm yyyy') {
-                $datetime = $months[$month - 1] . " $year";
-            } //Format 12 Janv 2015 5h5m
-            elseif ($type === 'jj mmmm yyyy hhmm') {
-                $datetime = "$day " . $months[$month - 1] . " $year ${hour}h${min}m";
-            } //Format 12 Janv 2015
-            elseif ($type === 'jj mmmm yyyy') {
-                $datetime = "$day " . $months[$month - 1] . " $year";
+            if(count(explode(" ", $datetime)) == 1){
+                $datetime = $datetime. ' 23:59:59';
             }
 
-        } else {
-            $datetime = "$day " . $months[$month - 1] . " $year";
+            list($date, $time) = explode(" ", $datetime);
+            list($year, $month, $day) = explode("-", $date);
+            list($hour, $min, $sec) = explode(":", $time);
+            $months = array("Janv", "Fév", "Mars", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc");
+
+            if (isset($type)) {
+                //Format 12/12/12
+                if ($type === 'jj/mm/yy') {
+                    $datetime = "$day/$month/$year";
+                } //Format 12/12/12 5:5
+                elseif($type === 'jj.mm.yy'){
+                    $datetime = "$day.$month.$year";
+                }
+                elseif ($type === 'jj/mm/yy h:m') {
+                    $datetime = "$day/$month/$year ${hour}:${min}";
+                } //Format 12/12/12 5:5:5
+                elseif ($type === 'jj/mm/yy h:m:s') {
+                    $datetime = "$day/$month/$year ${hour}:${min}:${sec}";
+                } //Format 12 Janv 2015 5h5m5s
+                elseif ($type === 'jj mmmm yyyy hhmmss') {
+                    $datetime = "$day " . $months[$month - 1] . " $year ${hour}h${min}m${sec}s";
+                } //Format Janv 2015
+                elseif ($type === 'mmmm yyyy') {
+                    $datetime = $months[$month - 1] . " $year";
+                } //Format 12 Janv 2015 5h5m
+                elseif ($type === 'jj mmmm yyyy hhmm') {
+                    $datetime = "$day " . $months[$month - 1] . " $year ${hour}h${min}m";
+                } //Format 12 Janv 2015
+                elseif ($type === 'jj mmmm yyyy') {
+                    $datetime = "$day " . $months[$month - 1] . " $year";
+                }
+
+            } else {
+                $datetime = "$day " . $months[$month - 1] . " $year";
+            }
+        }
+        else {
+            $datetime = '';
         }
 
         return $datetime;
@@ -297,7 +310,7 @@ class Entity
      */
     public function social_url (string $type): string
     {
-        return Config::getInstance()->get('app_' . $type);
+        return Config::getInstance()->get('app_' . $type .'_url');
     }
 
     /**
@@ -409,14 +422,26 @@ class Entity
      * @param $param
      * @return string
      */
-    public function is_current (string $param): string
+    public function is_current (string $param,bool $single = false): string
     {
-        if (isset($_GET['url']) && $_GET['url'] == $param) {
-            return 'active';
+        if(isset($single, $_GET['url']) && $single == true){
+            $array = explode('/', $_GET['url']);
+            if ($array[0] == $param) {
+                return 'active';
+            }
+            else {
+                return '';
+            }
         }
         else {
-            return '';
+            if (isset($_GET['url']) && $_GET['url'] == $param) {
+                return 'active';
+            }
+            else {
+                return '';
+            }
         }
+
     }
 
     /**

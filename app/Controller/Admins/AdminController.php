@@ -32,6 +32,9 @@ class AdminController extends \App\Controller\AppController {
 
         $admins = $this->Admin->MyAll([], ('username ASC'));
 
+        echo '<pre>';
+        print_r($_SESSION);
+        echo '</pre>';
         $this->render('admins.admins', compact('page_titre', 'styleCSS',
             'javascript', 'admins'));
 
